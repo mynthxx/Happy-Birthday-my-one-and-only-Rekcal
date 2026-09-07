@@ -81,7 +81,7 @@ function checkPassword() {
     } else {
 
         message.textContent =
-            "Hmmm... sai rồi nè 🥺";
+            "Hmmm... sai rồi ăm chã húi 🥺";
 
         passwordInput.value = "";
 
