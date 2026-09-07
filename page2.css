@@ -303,6 +303,51 @@ body {
 }
 
 /* =========================
+   FIX MUSIC PLAYER LAYOUT
+========================= */
+
+.music-player {
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.album-area {
+    width: 210px;
+    height: 210px;
+    flex-shrink: 0;
+}
+
+.music-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-name {
+    font-size: 25px;
+    white-space: nowrap;
+}
+
+.artist-name {
+    font-size: 15px;
+}
+
+.music-progress {
+    margin-top: 22px;
+}
+
+.music-controls {
+    margin-top: 18px;
+    gap: 35px;
+}
+
+.volume-area {
+    margin-top: 16px;
+}
+
+/* =========================
    APP AREA
 ========================= */
 
@@ -880,30 +925,3 @@ body {
     transform: scale(1.1);
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 800px) {
-
-    .music-player {
-        flex-direction: column;
-
-        padding: 25px;
-    }
-
-    .album-area {
-        width: 200px;
-        height: 200px;
-    }
-
-    .music-info {
-        width: 100%;
-    }
-
-    .song-name {
-        font-size: 22px;
-    }
-
-}
