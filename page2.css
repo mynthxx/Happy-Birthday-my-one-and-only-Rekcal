@@ -217,6 +217,15 @@ body {
 
     margin-bottom: 25px;
 }
+.artist-name {
+    font-size: 13px;
+
+    opacity: 0.75;
+
+    margin-top: -17px;
+
+    margin-bottom: 22px;
+}
 
 .progress-area {
     width: 90%;
@@ -276,13 +285,22 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.82);
 
     color: #444;
 
     font-size: 19px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
+.music-controls .play-button:hover {
+    transform: scale(1.1);
+
+    background: white;
+}
 
 /* =========================
    APP AREA
