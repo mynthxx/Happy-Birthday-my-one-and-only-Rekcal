@@ -26,29 +26,126 @@ setInterval(updateMenuTime, 1000);
 
 
 /* =========================
-   APPLE MUSIC
+   MUSIC PLAYER
 ========================= */
+
+const audio =
+    document.getElementById("audio");
 
 const playButton =
     document.getElementById("play-button");
 
+const progress =
+    document.getElementById("music-progress");
 
-const appleMusicLink =
-    "https://music.apple.com/vn/album/back-to-december-taylors-version/1690839749?i=1690840121&l=vi";
+const currentTime =
+    document.getElementById("current-time");
+
+const duration =
+    document.getElementById("duration");
 
 
 /* =========================
-   NÚT PLAY
+   PLAY / PAUSE
 ========================= */
 
 playButton.addEventListener(
     "click",
     function() {
 
-        window.open(
-            appleMusicLink,
-            "_blank"
-        );
+        if (audio.paused) {
+
+            audio.play();
+
+            playButton.textContent = "❚❚";
+
+        } else {
+
+            audio.pause();
+
+            playButton.textContent = "▶";
+
+        }
 
     }
 );
+
+
+/* =========================
+   HIỂN THỊ THỜI LƯỢNG
+========================= */
+
+audio.addEventListener(
+    "loadedmetadata",
+    function() {
+
+        duration.textContent =
+            formatTime(audio.duration);
+
+    }
+);
+
+
+/* =========================
+   THANH TIẾN TRÌNH
+========================= */
+
+audio.addEventListener(
+    "timeupdate",
+    function() {
+
+        if (!audio.duration) return;
+
+        const percent =
+            (audio.currentTime / audio.duration) * 100;
+
+        progress.style.width =
+            percent + "%";
+
+        currentTime.textContent =
+            formatTime(audio.currentTime);
+
+    }
+);
+
+
+/* =========================
+   KHI BÀI HÁT KẾT THÚC
+========================= */
+
+audio.addEventListener(
+    "ended",
+    function() {
+
+        playButton.textContent = "▶";
+
+        progress.style.width = "0%";
+
+        currentTime.textContent = "0:00";
+
+    }
+);
+
+
+/* =========================
+   ĐỊNH DẠNG THỜI GIAN
+========================= */
+
+function formatTime(seconds) {
+
+    if (isNaN(seconds)) {
+        return "0:00";
+    }
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const remainingSeconds =
+        Math.floor(seconds % 60);
+
+    return (
+        minutes +
+        ":" +
+        String(remainingSeconds).padStart(2, "0")
+    );
+}
