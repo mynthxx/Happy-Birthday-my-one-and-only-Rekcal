@@ -69,13 +69,20 @@
 
     <div class="music-progress">
 
-        <span>0:00</span>
+        <span id="current-time">
+            0:00
+        </span>
 
         <div class="progress-bar">
-            <div class="progress"></div>
+            <div
+                class="progress"
+                id="music-progress">
+            </div>
         </div>
 
-        <span>4:54</span>
+        <span id="duration">
+            0:00
+        </span>
 
     </div>
 
@@ -101,6 +108,12 @@
         </button>
 
     </div>
+
+
+    <!-- NHẠC -->
+    <audio id="audio">
+        <source src="music/song.mp3" type="audio/mpeg">
+    </audio>
 
 </div>
 
