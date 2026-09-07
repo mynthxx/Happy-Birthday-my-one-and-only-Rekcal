@@ -52,65 +52,133 @@
             </div>
 
 
-            <!-- MUSIC PLAYER -->
+            <<!-- =========================
+     MUSIC PLAYER
+========================= -->
+
 <div class="card music-player">
 
-    <div class="music-title">
-        ♫ Apple Music ♫
+    <!-- ALBUM ART -->
+    <div class="album-area">
+        <img
+            src="album.jpg"
+            alt="Album"
+            class="album-cover"
+        >
     </div>
 
-    <div class="song-name">
-        Back to December (Taylor's Version)
-    </div>
 
-    <div class="artist-name">
-        Taylor Swift
-    </div>
+    <!-- MUSIC INFO + CONTROLS -->
+    <div class="music-info">
 
-    <div class="music-progress">
+        <div class="music-top">
 
-        <span id="current-time">
-            0:00
-        </span>
+            <div>
+                <div class="music-device">
+                    Macbook
+                </div>
 
-        <div class="progress-bar">
-            <div
-                class="progress"
-                id="music-progress">
+                <div class="song-name">
+                    Back To December
+                </div>
+
+                <div class="artist-name">
+                    Taylor Swift
+                </div>
             </div>
+
+            <button
+                class="favorite-button"
+                id="favorite-button"
+                type="button">
+                ♡
+            </button>
+
         </div>
 
-        <span id="duration">
-            0:00
-        </span>
+
+        <!-- PROGRESS -->
+        <div class="music-progress">
+
+            <div class="progress-bar">
+                <div
+                    class="progress"
+                    id="music-progress">
+                </div>
+            </div>
+
+            <div class="time-row">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+
+        </div>
+
+
+        <!-- MAIN CONTROLS -->
+        <div class="music-controls">
+
+            <button
+                id="backward"
+                type="button">
+                ◀◀
+            </button>
+
+            <button
+                class="play-button"
+                id="play-button"
+                type="button">
+                ▶
+            </button>
+
+            <button
+                id="forward"
+                type="button">
+                ▶▶
+            </button>
+
+        </div>
+
+
+        <!-- VOLUME -->
+        <div class="volume-area">
+
+            <span class="volume-icon">
+                🔈
+            </span>
+
+            <input
+                type="range"
+                id="volume"
+                min="0"
+                max="1"
+                step="0.01"
+                value="1"
+            >
+
+            <span class="volume-icon">
+                🔊
+            </span>
+
+        </div>
+
+
+        <!-- REPEAT -->
+        <div class="repeat-area">
+
+            <button
+                id="repeat-button"
+                class="repeat-button active"
+                type="button">
+                🔁
+            </button>
+
+        </div>
 
     </div>
 
-    <div class="music-controls">
 
-        <button
-            id="backward"
-            type="button">
-            ◀◀
-        </button>
-
-        <button
-            class="play-button"
-            id="play-button"
-            type="button">
-            ▶
-        </button>
-
-        <button
-            id="forward"
-            type="button">
-            ▶▶
-        </button>
-
-    </div>
-
-
-    <!-- NHẠC -->
+    <!-- AUDIO -->
     <audio id="audio">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
@@ -118,7 +186,7 @@
 </div>
 
 
-            <!-- HÌNH 2 -->
+                <!-- HÌNH 2 -->
             <div class="card photo-card photo-2">
                 <img src="photo2.jpg" alt="Ảnh của hai đứa">
             </div>
