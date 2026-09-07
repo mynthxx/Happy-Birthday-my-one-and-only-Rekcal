@@ -149,3 +149,23 @@ function formatTime(seconds) {
         String(remainingSeconds).padStart(2, "0")
     );
 }
+
+/* =========================
+   TỰ ĐỘNG PHÁT NHẠC
+========================= */
+
+window.addEventListener("load", function() {
+
+    audio.play()
+        .then(function() {
+
+            playButton.textContent = "❚❚";
+
+        })
+        .catch(function(error) {
+
+            console.log("Autoplay bị trình duyệt chặn:", error);
+
+        });
+
+});
