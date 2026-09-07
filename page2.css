@@ -925,3 +925,146 @@ body {
     transform: scale(1.1);
 }
 
+/* =========================
+   FINAL MUSIC PLAYER FIX
+========================= */
+
+.music-player {
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    text-align: left !important;
+
+    gap: 28px;
+
+    padding: 24px;
+
+    overflow: hidden;
+}
+
+
+/* ALBUM */
+
+.music-player .album-area {
+    width: 210px !important;
+    height: 210px !important;
+
+    min-width: 210px;
+
+    flex-shrink: 0;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+}
+
+
+.music-player .album-cover {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* INFORMATION */
+
+.music-player .music-info {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* TITLE */
+
+.music-player .music-top {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+}
+
+
+.music-player .song-name {
+    font-size: 25px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    margin-bottom: 5px;
+}
+
+
+.music-player .artist-name {
+    font-size: 15px;
+
+    margin: 0;
+
+    opacity: 0.7;
+}
+
+
+/* PROGRESS */
+
+.music-player .music-progress {
+    width: 100%;
+
+    margin-top: 22px;
+}
+
+
+.music-player .progress-bar {
+    width: 100%;
+
+    height: 5px;
+}
+
+
+/* CONTROLS */
+
+.music-player .music-controls {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 35px;
+
+    margin-top: 18px;
+}
+
+
+/* VOLUME */
+
+.music-player .volume-area {
+    width: 100%;
+
+    margin-top: 16px;
+}
+
+
+/* REPEAT */
+
+.music-player .repeat-area {
+    margin-top: 8px;
+}
