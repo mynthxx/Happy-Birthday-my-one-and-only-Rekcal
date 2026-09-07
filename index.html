@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ♡</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="lock-screen">
+
+        <!-- Góc phải trên -->
+        <div class="status-bar">
+            <span>Việt Nam</span>
+            <span>⌁</span>
+            <span>🔋</span>
+        </div>
+
+        <!-- Ngày và giờ -->
+        <section class="datetime">
+            <div id="date"></div>
+            <div id="time"></div>
+        </section>
+
+
+        <!-- Khu vực đăng nhập -->
+        <section class="login-box">
+
+            <!-- Ảnh avatar của anh ấy -->
+            <img
+                src="avatar.jpg"
+                alt="Avatar"
+                class="avatar"
+            >
+
+            <!-- Tên -->
+            <div class="name">
+                ẢM CHÃ
+            </div>
+
+            <!-- Password -->
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Nhập mật khẩu"
+                    maxlength="6"
+                    inputmode="numeric"
+                >
+
+                <button id="login-button">
+                    →
+                </button>
+
+            </div>
+
+            <!-- Gợi ý -->
+            <div class="hint">
+                ♡ Gợi ý: Password bao gồm 6 số<br>
+                ngày tháng năm sinh của ăm chã nhoooo ♡
+            </div>
+
+            <!-- Thông báo -->
+            <div id="message"></div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
