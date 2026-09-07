@@ -35,14 +35,41 @@ const audio =
 const playButton =
     document.getElementById("play-button");
 
+const backwardButton =
+    document.getElementById("backward");
+
+const forwardButton =
+    document.getElementById("forward");
+
 const progress =
     document.getElementById("music-progress");
+
+const progressBar =
+    document.querySelector(".progress-bar");
 
 const currentTime =
     document.getElementById("current-time");
 
 const duration =
     document.getElementById("duration");
+
+const volume =
+    document.getElementById("volume");
+
+const repeatButton =
+    document.getElementById("repeat-button");
+
+const favoriteButton =
+    document.getElementById("favorite-button");
+
+
+/* =========================
+   REPEAT
+========================= */
+
+let repeat = true;
+
+audio.loop = true;
 
 
 /* =========================
@@ -72,7 +99,43 @@ playButton.addEventListener(
 
 
 /* =========================
-   HIỂN THỊ THỜI LƯỢNG
+   LÙI 10 GIÂY
+========================= */
+
+backwardButton.addEventListener(
+    "click",
+    function() {
+
+        audio.currentTime =
+            Math.max(
+                0,
+                audio.currentTime - 10
+            );
+
+    }
+);
+
+
+/* =========================
+   TIẾN 10 GIÂY
+========================= */
+
+forwardButton.addEventListener(
+    "click",
+    function() {
+
+        audio.currentTime =
+            Math.min(
+                audio.duration,
+                audio.currentTime + 10
+            );
+
+    }
+);
+
+
+/* =========================
+   LOAD THỜI LƯỢNG
 ========================= */
 
 audio.addEventListener(
@@ -87,7 +150,7 @@ audio.addEventListener(
 
 
 /* =========================
-   THANH TIẾN TRÌNH
+   UPDATE PROGRESS
 ========================= */
 
 audio.addEventListener(
@@ -97,7 +160,8 @@ audio.addEventListener(
         if (!audio.duration) return;
 
         const percent =
-            (audio.currentTime / audio.duration) * 100;
+            (audio.currentTime /
+             audio.duration) * 100;
 
         progress.style.width =
             percent + "%";
@@ -110,25 +174,130 @@ audio.addEventListener(
 
 
 /* =========================
-   KHI BÀI HÁT KẾT THÚC
+   CLICK THANH PROGRESS
 ========================= */
 
-audio.addEventListener(
-    "ended",
-    function() {
+progressBar.addEventListener(
+    "click",
+    function(event) {
 
-        playButton.textContent = "▶";
+        if (!audio.duration) return;
 
-        progress.style.width = "0%";
+        const rect =
+            progressBar.getBoundingClientRect();
 
-        currentTime.textContent = "0:00";
+        const clickPosition =
+            event.clientX - rect.left;
+
+        const percentage =
+            clickPosition / rect.width;
+
+        audio.currentTime =
+            percentage * audio.duration;
 
     }
 );
 
 
 /* =========================
-   ĐỊNH DẠNG THỜI GIAN
+   VOLUME
+========================= */
+
+audio.volume = 1;
+
+volume.addEventListener(
+    "input",
+    function() {
+
+        audio.volume =
+            volume.value;
+
+    }
+);
+
+
+/* =========================
+   REPEAT BUTTON
+========================= */
+
+repeatButton.addEventListener(
+    "click",
+    function() {
+
+        repeat = !repeat;
+
+        audio.loop = repeat;
+
+        if (repeat) {
+
+            repeatButton.classList.add("active");
+
+        } else {
+
+            repeatButton.classList.remove("active");
+
+        }
+
+    }
+);
+
+
+/* =========================
+   FAVORITE
+========================= */
+
+favoriteButton.addEventListener(
+    "click",
+    function() {
+
+        favoriteButton.classList.toggle("liked");
+
+        if (
+            favoriteButton.classList.contains("liked")
+        ) {
+
+            favoriteButton.textContent = "♥";
+
+        } else {
+
+            favoriteButton.textContent = "♡";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   KHI PLAY
+========================= */
+
+audio.addEventListener(
+    "play",
+    function() {
+
+        playButton.textContent = "❚❚";
+
+    }
+);
+
+
+/* =========================
+   KHI PAUSE
+========================= */
+
+audio.addEventListener(
+    "pause",
+    function() {
+
+        playButton.textContent = "▶";
+
+    }
+);
+
+
+/* =========================
+   FORMAT TIME
 ========================= */
 
 function formatTime(seconds) {
@@ -146,26 +315,7 @@ function formatTime(seconds) {
     return (
         minutes +
         ":" +
-        String(remainingSeconds).padStart(2, "0")
+        String(remainingSeconds)
+            .padStart(2, "0")
     );
 }
-
-/* =========================
-   TỰ ĐỘNG PHÁT NHẠC
-========================= */
-
-window.addEventListener("load", function() {
-
-    audio.play()
-        .then(function() {
-
-            playButton.textContent = "❚❚";
-
-        })
-        .catch(function(error) {
-
-            console.log("Autoplay bị trình duyệt chặn:", error);
-
-        });
-
-});
