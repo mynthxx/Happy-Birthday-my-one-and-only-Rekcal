@@ -1,0 +1,893 @@
+/* =========================================================
+   PAGE 2 — MACBOOK DESKTOP
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    background-image: url("couple.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+.desktop {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAC MENU BAR
+========================================================= */
+
+.menu-bar {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    background: rgba(35, 30, 30, 0.72);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    z-index: 100;
+}
+
+.menu-left,
+.menu-right {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.menu-left .apple {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.desktop-grid {
+
+    position: absolute;
+
+    top: 55px;
+    left: 4%;
+
+    width: 92%;
+    height: calc(100vh - 125px);
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.1fr
+        1fr;
+
+    grid-template-rows:
+        1fr
+        1.05fr;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CARD BASE
+========================================================= */
+
+.card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(255,255,255,0.55);
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.10);
+
+}
+
+
+/* =========================================================
+   PHOTOS
+========================================================= */
+
+.photo-card {
+    overflow: hidden;
+}
+
+.photo-card img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* HÌNH 1 */
+
+.photo-1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+
+/* HÌNH 2 */
+
+.photo-2 {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+
+/* HÌNH 3 */
+
+.photo-3 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+
+/* =========================================================
+   MUSIC PLAYER
+========================================================= */
+
+.music-player {
+
+    grid-column: 2;
+    grid-row: 1;
+
+    display: flex;
+    align-items: center;
+
+    padding: 26px;
+
+    gap: 25px;
+
+    background:
+        rgba(255,255,255,0.20);
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+}
+
+
+/* =========================================================
+   ALBUM
+========================================================= */
+
+.album-area {
+
+    width: 42%;
+    aspect-ratio: 1 / 1;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.25);
+}
+
+.album-cover {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================================
+   MUSIC INFO
+========================================================= */
+
+.music-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    height: 100%;
+}
+
+.music-top {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.music-device {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    opacity: 0.75;
+
+    margin-bottom: 4px;
+}
+
+.song-name {
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.artist-name {
+
+    margin-top: 5px;
+
+    font-size: 14px;
+
+    opacity: 0.75;
+}
+
+
+/* HEART */
+
+.favorite-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.favorite-button:hover {
+
+    transform: scale(1.15);
+}
+
+
+/* =========================================================
+   MUSIC PROGRESS
+========================================================= */
+
+.music-progress {
+
+    width: 100%;
+
+    margin-bottom: 22px;
+}
+
+.progress-bar {
+
+    width: 100%;
+    height: 5px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.35);
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.progress {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: white;
+
+    border-radius: 10px;
+}
+
+.time-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 6px;
+
+    font-size: 11px;
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   MUSIC CONTROLS
+========================================================= */
+
+.music-controls {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 38px;
+
+    margin-bottom: 20px;
+}
+
+.music-controls button {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+.play-button {
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50% !important;
+
+    background: white !important;
+
+    color: #444 !important;
+
+    font-size: 20px !important;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.18);
+}
+
+
+/* =========================================================
+   VOLUME
+========================================================= */
+
+.volume-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin-top: 2px;
+}
+
+.volume-icon {
+
+    font-size: 12px;
+
+    opacity: 0.75;
+}
+
+.volume-area input {
+
+    flex: 1;
+
+    accent-color: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   REPEAT
+========================================================= */
+
+.repeat-area {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 10px;
+}
+
+.repeat-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    opacity: 0.9;
+}
+
+.repeat-button.active {
+
+    opacity: 1;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   APP AREA
+========================================================= */
+
+.apps-area {
+
+    grid-column: 1;
+    grid-row: 2;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows: 1fr 1fr;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   APP ITEM
+========================================================= */
+
+.app-item {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    /* NỀN TRẮNG ĐỒNG NHẤT */
+
+    background: rgba(255,255,255,0.96);
+
+    border: 1px solid rgba(255,255,255,0.95);
+
+    border-radius: 20px;
+
+    overflow: visible;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* hover */
+
+.app-item:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15);
+}
+
+
+/* =========================================================
+   APP ICON
+========================================================= */
+
+.app-icon {
+
+    width: 88px;
+    height: 88px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    overflow: visible;
+}
+
+
+/* ẢNH ICON */
+
+.app-icon img {
+
+    width: 78px;
+    height: 78px;
+
+    object-fit: contain;
+
+    display: block;
+
+    /* KHÔNG tạo nền trắng thêm */
+
+    background: transparent;
+
+    border-radius: 0;
+}
+
+
+/* =========================================================
+   APP NAME
+========================================================= */
+
+.app-name {
+
+    color: #333;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+========================================================= */
+
+.app-item.has-notification::after {
+
+    content: "1";
+
+    position: absolute;
+
+    top: -7px;
+    right: -7px;
+
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ff2d2d;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    border: 2px solid white;
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,0.20);
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+.calendar {
+
+    grid-column: 3;
+    grid-row: 2;
+
+    padding: 25px;
+
+    background:
+        rgba(255,255,255,0.28);
+}
+
+
+/* HEADER */
+
+.calendar-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 24px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+
+/* WEEKDAYS */
+
+.calendar-weekdays {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    text-align: center;
+
+    margin-bottom: 12px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    opacity: 0.8;
+}
+
+
+/* DAYS */
+
+.calendar-days {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    grid-auto-rows: 34px;
+
+    text-align: center;
+
+    align-items: center;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* DAY 6 */
+
+.heart-day {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.35);
+}
+
+.heart-day::after {
+
+    content: "♡";
+
+    position: absolute;
+
+    font-size: 29px;
+
+    color: white;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   MAC DOCK
+========================================================= */
+
+.dock {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 12px;
+
+    transform: translateX(-50%);
+
+    height: 60px;
+
+    padding: 8px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.40);
+
+    border: 1px solid rgba(255,255,255,0.55);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.15);
+
+    z-index: 100;
+}
+
+.dock-item {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.dock-item:hover {
+
+    transform: scale(1.25) translateY(-5px);
+}
+
+.dock-line {
+
+    width: 1px;
+
+    height: 32px;
+
+    background:
+        rgba(255,255,255,0.7);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .desktop-grid {
+
+        left: 3%;
+
+        width: 94%;
+
+        gap: 12px;
+    }
+
+    .music-player {
+
+        padding: 18px;
+
+        gap: 15px;
+    }
+
+    .song-name {
+
+        font-size: 19px;
+    }
+
+    .album-area {
+
+        width: 38%;
+    }
+
+    .app-icon {
+
+        width: 75px;
+        height: 75px;
+    }
+
+    .app-icon img {
+
+        width: 68px;
+        height: 68px;
+    }
+}
