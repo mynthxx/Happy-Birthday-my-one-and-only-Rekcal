@@ -1,0 +1,1120 @@
+/* =====================================================
+   HAPPY BIRTHDAY — PAGE 2
+   MACBOOK DESKTOP
+===================================================== */
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+}
+
+
+/* =====================================================
+   DESKTOP
+===================================================== */
+
+.desktop {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.12),
+            rgba(0, 0, 0, 0.12)
+        ),
+        url("couple2.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+}
+
+
+/* =====================================================
+   MAC MENU BAR
+===================================================== */
+
+.menu-bar {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    background:
+        rgba(245, 245, 245, 0.32);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    color: white;
+
+    font-size: 13px;
+
+    z-index: 100;
+}
+
+.menu-left,
+.menu-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.apple {
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   MAIN GRID
+===================================================== */
+
+.desktop-grid {
+    position: absolute;
+
+    top: 58px;
+    left: 4%;
+    right: 4%;
+    bottom: 105px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.05fr
+        1.3fr
+        1fr;
+
+    grid-template-rows:
+        1fr
+        1.25fr;
+
+    gap: 18px;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+
+/* =====================================================
+   GENERAL CARD
+===================================================== */
+
+.card {
+    border-radius: 24px;
+
+    background:
+        rgba(255, 255, 255, 0.18);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+
+/* =====================================================
+   PHOTOS
+===================================================== */
+
+.photo-card {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================================
+   PHOTO POSITIONS
+===================================================== */
+
+.photo-1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.photo-2 {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.photo-3 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+
+/* =====================================================
+   MUSIC PLAYER
+===================================================== */
+
+.music-player {
+    grid-column: 2;
+    grid-row: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        210px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 24px;
+
+    min-width: 0;
+    min-height: 0;
+
+    text-align: left;
+}
+
+
+/* =====================================================
+   ALBUM ART
+===================================================== */
+
+.music-player .album-area {
+    width: 210px;
+    height: 210px;
+
+    min-width: 210px;
+    min-height: 210px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 14px 35px
+        rgba(0, 0, 0, 0.25);
+}
+
+.music-player .album-cover {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================================
+   MUSIC INFO
+===================================================== */
+
+.music-player .music-info {
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: stretch;
+}
+
+
+/* =====================================================
+   MUSIC TOP
+===================================================== */
+
+.music-player .music-top {
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.music-player .music-device {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    opacity: 0.65;
+
+    margin-bottom: 5px;
+}
+
+.music-player .song-name {
+    font-size: 25px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    white-space: nowrap;
+
+    margin-bottom: 5px;
+}
+
+.music-player .artist-name {
+    font-size: 15px;
+
+    line-height: 1.2;
+
+    opacity: 0.7;
+}
+
+
+/* =====================================================
+   MUSIC HEART
+===================================================== */
+
+.music-player .favorite-button {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 29px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+.music-player .favorite-button:hover {
+    transform: scale(1.15);
+}
+
+.music-player .favorite-button.liked {
+    color: #ff6f91;
+}
+
+
+/* =====================================================
+   MUSIC PROGRESS
+===================================================== */
+
+.music-player .music-progress {
+    width: 100%;
+
+    margin-top: 25px;
+}
+
+.music-player .progress-bar {
+    width: 100%;
+
+    height: 5px;
+
+    background:
+        rgba(255, 255, 255, 0.28);
+
+    border-radius: 99px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.music-player .progress {
+    width: 0%;
+
+    height: 100%;
+
+    background: white;
+
+    border-radius: 99px;
+}
+
+.music-player .time-row {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    opacity: 0.65;
+}
+
+
+/* =====================================================
+   MUSIC CONTROLS
+===================================================== */
+
+.music-player .music-controls {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 38px;
+
+    margin-top: 19px;
+}
+
+.music-player .music-controls button {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.music-player .music-controls button:hover {
+    transform: scale(1.12);
+
+    opacity: 0.85;
+}
+
+
+/* =====================================================
+   PLAY BUTTON
+===================================================== */
+
+.music-player .play-button {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: white !important;
+
+    color: #444 !important;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px !important;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.music-player .play-button:hover {
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   VOLUME
+===================================================== */
+
+.music-player .volume-area {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 18px;
+}
+
+.music-player .volume-icon {
+    font-size: 13px;
+
+    opacity: 0.8;
+
+    flex-shrink: 0;
+}
+
+.music-player #volume {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 4px;
+
+    cursor: pointer;
+
+    accent-color: white;
+}
+
+
+/* =====================================================
+   REPEAT
+===================================================== */
+
+.music-player .repeat-area {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 7px;
+}
+
+.music-player .repeat-button {
+    border: none;
+
+    background: transparent;
+
+    color:
+        rgba(255, 255, 255, 0.45);
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.music-player .repeat-button.active {
+    color: white;
+
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   4 APPS
+===================================================== */
+
+.apps-area {
+    grid-column: 1;
+    grid-row: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap: 14px;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+
+/* =====================================================
+   APP BOX
+===================================================== */
+
+.app-item {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    /* TRẮNG FULL Ô */
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid rgba(255, 255, 255, 1);
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.14);
+
+    cursor: pointer;
+
+    overflow: visible;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Hover app */
+
+.app-item:hover {
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+/* =====================================================
+   APP ICON
+===================================================== */
+
+/*
+   ẢNH ICON ĐƯỢC KHÓA KÍCH THƯỚC.
+   95px = TO HƠN BẢN HIỆN TẠI.
+*/
+
+.apps-area .app-icon {
+    width: 95px !important;
+    height: 95px !important;
+
+    max-width: 95px !important;
+    max-height: 95px !important;
+
+    min-width: 95px !important;
+    min-height: 95px !important;
+
+    object-fit: contain !important;
+
+    display: block !important;
+
+    margin: 0 0 8px 0 !important;
+
+    padding: 0 !important;
+
+    border: none !important;
+
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+
+    background: transparent !important;
+
+    flex-shrink: 0 !important;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+/* Hover icon */
+
+.app-item:hover .app-icon {
+    transform:
+        scale(1.07);
+}
+
+
+/* =====================================================
+   APP NAME
+===================================================== */
+
+.apps-area .app-name {
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    line-height: 1.2;
+
+    text-align: center;
+
+    color: #333;
+
+    font-weight: 600;
+
+    text-shadow: none;
+}
+
+
+/* =====================================================
+   NOTIFICATION BADGE
+===================================================== */
+
+.notification-badge {
+    position: absolute;
+
+    top: -6px;
+    right: -6px;
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ff3b30;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    border:
+        2px solid white;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0, 0, 0, 0.25);
+
+    z-index: 30;
+}
+
+
+/* =====================================================
+   CALENDAR
+===================================================== */
+
+.calendar {
+    grid-column: 3;
+    grid-row: 2;
+
+    padding: 22px;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+.calendar-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 28px;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    text-align: center;
+}
+
+.calendar-weekdays {
+    font-size: 11px;
+
+    opacity: 0.8;
+
+    margin-bottom: 10px;
+}
+
+.calendar-days {
+    gap: 10px 4px;
+
+    font-size: 15px;
+}
+
+.calendar-days span {
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   HEART DAY — OCTOBER 6
+===================================================== */
+
+.heart-day::before {
+    content: "♡";
+
+    position: absolute;
+
+    font-size: 31px;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 0;
+}
+
+.heart-day {
+    z-index: 2;
+}
+
+
+/* =====================================================
+   MAC DOCK
+===================================================== */
+
+.dock {
+    position: absolute;
+
+    left: 50%;
+    bottom: 17px;
+
+    transform:
+        translateX(-50%);
+
+    min-width: 360px;
+
+    height: 67px;
+
+    padding: 8px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(245, 245, 245, 0.28);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.18);
+
+    z-index: 100;
+}
+
+.dock-item {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.dock-item:hover {
+    transform:
+        translateY(-8px)
+        scale(1.12);
+}
+
+.dock-line {
+    width: 1px;
+
+    height: 35px;
+
+    background:
+        rgba(255, 255, 255, 0.35);
+
+    margin: 0 3px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .desktop {
+        min-height: 100vh;
+
+        height: auto;
+
+        overflow-y: auto;
+    }
+
+
+    /* MAIN */
+
+    .desktop-grid {
+        position: relative;
+
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+
+        margin:
+            65px 18px 105px;
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows: auto;
+
+        gap: 15px;
+    }
+
+
+    /* RESET GRID POSITIONS */
+
+    .photo-1,
+    .music-player,
+    .photo-2,
+    .apps-area,
+    .photo-3,
+    .calendar {
+
+        grid-column: auto;
+
+        grid-row: auto;
+    }
+
+
+    /* PHOTO / CALENDAR */
+
+    .photo-card,
+    .calendar {
+        min-height: 210px;
+    }
+
+
+    /* =================================================
+       MUSIC MOBILE
+    ================================================= */
+
+    .music-player {
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            auto auto;
+
+        gap: 20px;
+
+        min-height: auto;
+
+        padding: 22px;
+    }
+
+    .music-player .album-area {
+
+        width: 190px;
+        height: 190px;
+
+        min-width: 190px;
+        min-height: 190px;
+
+        justify-self: center;
+    }
+
+    .music-player .music-info {
+        width: 100%;
+    }
+
+    .music-player .song-name {
+
+        font-size: 22px;
+
+        white-space: normal;
+    }
+
+    .music-player .music-top {
+
+        text-align: center;
+
+        justify-content: center;
+    }
+
+    .music-player .favorite-button {
+
+        position: absolute;
+
+        margin-left: 190px;
+    }
+
+
+    /* =================================================
+       APPS MOBILE
+    ================================================= */
+
+    .apps-area {
+
+        min-height: 280px;
+
+        gap: 10px;
+    }
+
+    .apps-area .app-icon {
+
+        width: 75px !important;
+        height: 75px !important;
+
+        max-width: 75px !important;
+        max-height: 75px !important;
+
+        min-width: 75px !important;
+        min-height: 75px !important;
+    }
+
+    .apps-area .app-name {
+        font-size: 10px;
+    }
+
+
+    /* =================================================
+       CALENDAR MOBILE
+    ================================================= */
+
+    .calendar {
+        padding: 18px;
+    }
+
+    .calendar-header {
+        font-size: 24px;
+    }
+
+    .calendar-days {
+        font-size: 14px;
+    }
+
+
+    /* =================================================
+       DOCK MOBILE
+    ================================================= */
+
+    .dock {
+
+        min-width: auto;
+
+        width:
+            calc(100% - 30px);
+
+        gap: 8px;
+    }
+
+    .dock-item {
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 20px;
+    }
+
+
+    /* =================================================
+       MENU MOBILE
+    ================================================= */
+
+    .menu-left span:not(.apple) {
+        display: none;
+    }
+}
