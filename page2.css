@@ -582,11 +582,8 @@ body {
 
     display: grid;
 
-    grid-template-columns:
-        1fr 1fr;
-
-    grid-template-rows:
-        1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 
     gap: 14px;
 
@@ -614,29 +611,32 @@ body {
 
     border-radius: 22px;
 
-    background:
-        rgba(255, 255, 255, 0.16);
+    /* NỀN TRẮNG FULL Ô */
+    background: rgba(255, 255, 255, 0.94);
 
     border:
-        1px solid rgba(255, 255, 255, 0.3);
+        1px solid rgba(255, 255, 255, 1);
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.12);
 
     cursor: pointer;
 
     overflow: visible;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
+
+/* Hover */
 
 .app-item:hover {
     transform: translateY(-4px);
 
-    background:
-        rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
 
@@ -644,18 +644,12 @@ body {
    APP ICON
 ===================================================== */
 
-/*
-   QUAN TRỌNG:
-   Icon ảnh được khóa kích thước ở đây.
-   Không để kích thước ảnh gốc phá layout.
-*/
-
 .app-icon {
-    width: 75px !important;
-    height: 75px !important;
+    width: 95px !important;
+    height: 95px !important;
 
-    max-width: 75px !important;
-    max-height: 75px !important;
+    max-width: 95px !important;
+    max-height: 95px !important;
 
     min-width: 0 !important;
     min-height: 0 !important;
@@ -664,7 +658,7 @@ body {
 
     display: block !important;
 
-    margin-bottom: 7px !important;
+    margin-bottom: 8px !important;
 
     flex-shrink: 0;
 
@@ -680,8 +674,11 @@ body {
         transform 0.2s ease;
 }
 
+
+/* Icon phóng nhẹ khi hover */
+
 .app-item:hover .app-icon {
-    transform: scale(1.08);
+    transform: scale(1.07);
 }
 
 
@@ -690,18 +687,19 @@ body {
 ===================================================== */
 
 .app-name {
-    font-size: 11px;
+    font-size: 12px;
 
     letter-spacing: 1px;
 
     text-align: center;
 
-    color: white;
+    color: #333;
 
     line-height: 1.2;
 
-    text-shadow:
-        0 1px 5px rgba(0, 0, 0, 0.35);
+    font-weight: 600;
+
+    text-shadow: none;
 }
 
 
@@ -712,11 +710,11 @@ body {
 .notification-badge {
     position: absolute;
 
-    top: -4px;
-    right: -4px;
+    top: -5px;
+    right: -5px;
 
-    width: 25px;
-    height: 25px;
+    width: 27px;
+    height: 27px;
 
     display: flex;
 
@@ -736,14 +734,13 @@ body {
     line-height: 1;
 
     border:
-        2px solid rgba(255, 255, 255, 0.9);
+        2px solid white;
 
     box-shadow:
         0 3px 8px rgba(0, 0, 0, 0.25);
 
     z-index: 20;
 }
-
 
 /* =====================================================
    CALENDAR
