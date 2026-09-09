@@ -319,3 +319,135 @@ function formatTime(seconds) {
             .padStart(2, "0")
     );
 }
+
+
+/* =====================================================
+   APP WINDOWS
+   MEMORIES / SAFARI / TIN NHẮN / LỊCH
+===================================================== */
+
+
+/* =========================
+   LẤY 4 APP ICON
+========================= */
+
+const appItems =
+    document.querySelectorAll(".app-item");
+
+
+/* =========================
+   HÀM MỞ WINDOW
+========================= */
+
+function openAppWindow(windowId) {
+
+    const windowElement =
+        document.getElementById(windowId);
+
+    if (!windowElement) return;
+
+    windowElement.classList.add("open");
+}
+
+
+/* =========================
+   HÀM ĐÓNG WINDOW
+========================= */
+
+function closeAppWindow(windowId) {
+
+    const windowElement =
+        document.getElementById(windowId);
+
+    if (!windowElement) return;
+
+    windowElement.classList.remove("open");
+}
+
+
+/* =========================
+   CLICK 4 APP
+========================= */
+
+appItems.forEach(
+    function(app, index) {
+
+        app.addEventListener(
+            "click",
+            function() {
+
+                /*
+                    APP 1 → MEMORIES
+                    APP 2 → SAFARI
+                    APP 3 → TIN NHẮN
+                    APP 4 → LỊCH
+                */
+
+                if (index === 0) {
+
+                    openAppWindow(
+                        "memories-window"
+                    );
+
+                }
+
+                else if (index === 1) {
+
+                    openAppWindow(
+                        "safari-window"
+                    );
+
+                }
+
+                else if (index === 2) {
+
+                    openAppWindow(
+                        "message-window"
+                    );
+
+                }
+
+                else if (index === 3) {
+
+                    openAppWindow(
+                        "calendar-window"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   NÚT ĐÓNG 🔴
+========================= */
+
+const closeButtons =
+    document.querySelectorAll(
+        ".window-close"
+    );
+
+
+closeButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                const windowId =
+                    button.dataset.window;
+
+                closeAppWindow(windowId);
+
+            }
+        );
+
+    }
+);
