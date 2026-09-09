@@ -836,3 +836,271 @@ body {
         font-size: 19px;
     }
 }
+
+/* =====================================================
+   APP WINDOWS — MACBOOK STYLE
+   Không ảnh hưởng layout Page 2 hiện tại
+===================================================== */
+
+.app-window {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    width: min(850px, 80vw);
+    height: min(600px, 75vh);
+
+    transform: translate(-50%, -50%) scale(0.94);
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30),
+        0 5px 20px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 2000;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+/* Khi mở cửa sổ */
+
+.app-window.open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+
+/* =====================================================
+   WINDOW HEADER
+===================================================== */
+
+.window-header {
+
+    width: 100%;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(250, 250, 250, 0.98),
+            rgba(235, 235, 235, 0.96)
+        );
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    user-select: none;
+}
+
+
+/* =====================================================
+   3 NÚT MAC
+===================================================== */
+
+.window-buttons {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.window-buttons span {
+
+    width: 13px;
+    height: 13px;
+
+    display: block;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(0, 0, 0, 0.12);
+
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+
+/* ĐỎ — CLOSE */
+
+.window-close {
+
+    background: #ff5f57;
+
+    cursor: pointer;
+
+    transition: transform 0.15s ease;
+}
+
+
+.window-close:hover {
+
+    transform: scale(1.12);
+}
+
+
+/* VÀNG — MINIMIZE */
+
+.window-minimize {
+
+    background: #ffbd2e;
+}
+
+
+/* XANH — MAXIMIZE */
+
+.window-maximize {
+
+    background: #28c840;
+}
+
+
+/* =====================================================
+   WINDOW TITLE
+===================================================== */
+
+.window-title {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #333;
+
+    letter-spacing: 0.1px;
+}
+
+
+/* =====================================================
+   WINDOW CONTENT
+===================================================== */
+
+.window-content {
+
+    width: 100%;
+
+    height: calc(100% - 48px);
+
+    padding: 35px;
+
+    overflow: auto;
+
+    background: #ffffff;
+
+    color: #222;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+.window-content h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   MAC WINDOW — SCROLLBAR
+===================================================== */
+
+.window-content::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+
+.window-content::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.window-content::-webkit-scrollbar-thumb {
+
+    background: rgba(0, 0, 0, 0.18);
+
+    border-radius: 10px;
+}
+
+
+.window-content::-webkit-scrollbar-thumb:hover {
+
+    background: rgba(0, 0, 0, 0.30);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .app-window {
+
+        width: 92vw;
+
+        height: 78vh;
+
+        border-radius: 14px;
+    }
+
+    .window-content {
+
+        padding: 25px;
+    }
+
+    .window-content h1 {
+
+        font-size: 24px;
+    }
+}
