@@ -1250,18 +1250,24 @@ body {
 
 
 /* =====================================================
-   LOVE COUNTER — CONTENT
+   LOVE COUNTER
 ===================================================== */
 
 .love-counter {
+
     position: absolute;
 
-    top: 50%;
+    top: 51%;
     left: 50%;
 
     transform: translate(-50%, -50%);
 
-    width: 86%;
+    /*
+       Chỉ sử dụng vùng trống ở chính giữa
+       để không đè lên hình minh họa.
+    */
+
+    width: 58%;
 
     text-align: center;
 
@@ -1270,41 +1276,45 @@ body {
 
 
 /* =====================================================
-   "TỤI MÌNH ĐÃ Ở BÊN NHAU ĐƯỢC"
+   CÂU MỞ ĐẦU
 ===================================================== */
 
 .counter-intro {
-    margin: 0 0 28px;
 
-    font-size: clamp(30px, 3.5vw, 50px);
+    margin: 0 0 20px;
+
+    font-size: 20px;
 
     font-weight: 700;
 
-    line-height: 1.2;
+    line-height: 1.25;
 
     color: #4a2925;
 
-    letter-spacing: -0.5px;
+    letter-spacing: -0.2px;
 
     text-shadow:
-        0 2px 8px rgba(255, 255, 255, 0.85);
+        0 2px 6px rgba(255, 255, 255, 0.9);
 }
 
 
 /* =====================================================
-   TIME
+   DÃY THỜI GIAN
 ===================================================== */
 
 .counter-time {
+
     display: flex;
 
     justify-content: center;
 
     align-items: flex-start;
 
-    gap: clamp(10px, 1.8vw, 25px);
+    gap: 12px;
 
     flex-wrap: nowrap;
+
+    width: 100%;
 }
 
 
@@ -1313,7 +1323,8 @@ body {
 ===================================================== */
 
 .time-box {
-    min-width: 70px;
+
+    min-width: 48px;
 
     display: flex;
 
@@ -1322,6 +1333,8 @@ body {
     align-items: center;
 
     justify-content: center;
+
+    flex: 1;
 }
 
 
@@ -1330,9 +1343,10 @@ body {
 ===================================================== */
 
 .time-box span {
+
     display: block;
 
-    font-size: clamp(28px, 3.4vw, 50px);
+    font-size: 38px;
 
     font-weight: 700;
 
@@ -1343,26 +1357,29 @@ body {
     font-variant-numeric: tabular-nums;
 
     text-shadow:
-        0 2px 7px rgba(255, 255, 255, 0.9);
+        0 2px 6px rgba(255, 255, 255, 0.9);
 }
 
 
 /* =====================================================
-   ĐƠN VỊ: NĂM / THÁNG / NGÀY...
+   ĐƠN VỊ
 ===================================================== */
 
 .time-box small {
+
     display: block;
 
-    margin-top: 9px;
+    margin-top: 7px;
 
-    font-size: clamp(11px, 1vw, 14px);
+    font-size: 12px;
 
     font-weight: 600;
 
+    line-height: 1.2;
+
     color: #713c36;
 
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 
     text-shadow:
         0 1px 5px rgba(255, 255, 255, 0.9);
@@ -1370,49 +1387,73 @@ body {
 
 
 /* =====================================================
-   "VÀ SẼ CÒN Ở BÊN NHAU ĐẾN SUỐT ĐỜI"
+   CÂU KẾT
 ===================================================== */
 
 .counter-ending {
-    margin: 32px 0 0;
 
-    font-size: clamp(18px, 1.8vw, 27px);
+    margin: 22px 0 0;
+
+    font-size: 17px;
 
     font-weight: 600;
 
-    line-height: 1.4;
+    line-height: 1.35;
 
     color: #63332e;
 
     text-shadow:
-        0 2px 8px rgba(255, 255, 255, 0.9);
+        0 2px 7px rgba(255, 255, 255, 0.9);
 }
 
 
 /* =====================================================
-   MOBILE / CỬA SỔ NHỎ
+   CỬA SỔ NHỎ
 ===================================================== */
 
 @media (max-width: 800px) {
 
     .love-counter {
-        width: 92%;
+
+        width: 68%;
+
+        top: 51%;
     }
 
     .counter-intro {
-        margin-bottom: 22px;
+
+        font-size: 17px;
+
+        margin-bottom: 17px;
     }
 
     .counter-time {
+
         gap: 7px;
     }
 
     .time-box {
-        min-width: 48px;
+
+        min-width: 38px;
+    }
+
+    .time-box span {
+
+        font-size: 28px;
+    }
+
+    .time-box small {
+
+        font-size: 10px;
+
+        margin-top: 6px;
     }
 
     .counter-ending {
-        margin-top: 24px;
+
+        margin-top: 18px;
+
+        font-size: 14px;
     }
 }
 
@@ -1423,13 +1464,28 @@ body {
 
 @media (max-width: 560px) {
 
-    .counter-time {
-        flex-wrap: wrap;
+    .love-counter {
 
-        row-gap: 16px;
+        width: 78%;
     }
 
-    .time-box {
-        min-width: 55px;
+    .counter-time {
+
+        gap: 4px;
+    }
+
+    .time-box span {
+
+        font-size: 23px;
+    }
+
+    .time-box small {
+
+        font-size: 9px;
+    }
+
+    .counter-ending {
+
+        font-size: 13px;
     }
 }
