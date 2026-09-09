@@ -1104,3 +1104,52 @@ body {
         font-size: 24px;
     }
 }
+
+/* =====================================================
+   APP BACKGROUND BLUR
+===================================================== */
+
+.app-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 1500;
+}
+
+
+/* Khi app được mở */
+
+.app-overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* Cửa sổ phải nằm trên lớp blur */
+
+.app-window {
+
+    z-index: 1600;
+
+}
