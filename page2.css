@@ -1489,3 +1489,84 @@ body {
         font-size: 13px;
     }
 }
+
+/* =====================================================
+   FINAL FIX — CALENDAR LOVE COUNTER
+===================================================== */
+
+.calendar-content .love-counter {
+    width: 58% !important;
+    top: 51% !important;
+}
+
+
+/* CÂU "TỤI MÌNH ĐÃ Ở BÊN NHAU ĐƯỢC" */
+
+.calendar-content .counter-intro {
+    margin: 0 0 16px !important;
+
+    font-size: 16px !important;
+
+    line-height: 1.2 !important;
+
+    font-weight: 700 !important;
+}
+
+
+/* DÃY SỐ */
+
+.calendar-content .counter-time {
+    display: flex !important;
+
+    justify-content: center !important;
+
+    align-items: flex-start !important;
+
+    gap: 8px !important;
+
+    flex-wrap: nowrap !important;
+}
+
+
+/* TỪNG Ô */
+
+.calendar-content .time-box {
+    min-width: 42px !important;
+
+    flex: 1 !important;
+}
+
+
+/* SỐ */
+
+.calendar-content .time-box span {
+    font-size: 30px !important;
+
+    line-height: 1 !important;
+
+    font-weight: 700 !important;
+}
+
+
+/* NĂM / THÁNG / NGÀY... */
+
+.calendar-content .time-box small {
+    margin-top: 5px !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.1 !important;
+}
+
+
+/* CÂU CUỐI */
+
+.calendar-content .counter-ending {
+    margin: 16px 0 0 !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.3 !important;
+
+    font-weight: 600 !important;
+}
