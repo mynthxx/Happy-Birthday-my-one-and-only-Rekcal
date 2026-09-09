@@ -1,6 +1,6 @@
-/* =========================
+/* =====================================================
    HIỂN THỊ GIỜ VIỆT NAM
-========================= */
+===================================================== */
 
 function updateMenuTime() {
 
@@ -16,8 +16,12 @@ function updateMenuTime() {
         }
     ).format(now);
 
-    document.getElementById("menu-time").textContent =
-        vietnamTime;
+    const menuTime =
+        document.getElementById("menu-time");
+
+    if (menuTime) {
+        menuTime.textContent = vietnamTime;
+    }
 }
 
 updateMenuTime();
@@ -25,9 +29,9 @@ updateMenuTime();
 setInterval(updateMenuTime, 1000);
 
 
-/* =========================
+/* =====================================================
    MUSIC PLAYER
-========================= */
+===================================================== */
 
 const audio =
     document.getElementById("audio");
@@ -63,242 +67,300 @@ const favoriteButton =
     document.getElementById("favorite-button");
 
 
-/* =========================
+/* =====================================================
    REPEAT
-========================= */
+===================================================== */
 
 let repeat = true;
 
-audio.loop = true;
+if (audio) {
+    audio.loop = true;
+}
 
 
-/* =========================
+/* =====================================================
    PLAY / PAUSE
-========================= */
+===================================================== */
 
-playButton.addEventListener(
-    "click",
-    function() {
+if (playButton && audio) {
 
-        if (audio.paused) {
+    playButton.addEventListener(
+        "click",
+        function() {
 
-            audio.play();
+            if (audio.paused) {
 
-            playButton.textContent = "❚❚";
+                audio.play();
 
-        } else {
+            } else {
 
-            audio.pause();
+                audio.pause();
 
-            playButton.textContent = "▶";
+            }
 
         }
+    );
 
-    }
-);
+}
 
 
-/* =========================
+/* =====================================================
    LÙI 10 GIÂY
-========================= */
+===================================================== */
 
-backwardButton.addEventListener(
-    "click",
-    function() {
+if (backwardButton && audio) {
 
-        audio.currentTime =
-            Math.max(
-                0,
-                audio.currentTime - 10
-            );
+    backwardButton.addEventListener(
+        "click",
+        function() {
 
-    }
-);
+            audio.currentTime =
+                Math.max(
+                    0,
+                    audio.currentTime - 10
+                );
+
+        }
+    );
+
+}
 
 
-/* =========================
+/* =====================================================
    TIẾN 10 GIÂY
-========================= */
+===================================================== */
 
-forwardButton.addEventListener(
-    "click",
-    function() {
+if (forwardButton && audio) {
 
-        audio.currentTime =
-            Math.min(
-                audio.duration,
-                audio.currentTime + 10
+    forwardButton.addEventListener(
+        "click",
+        function() {
+
+            if (!audio.duration) return;
+
+            audio.currentTime =
+                Math.min(
+                    audio.duration,
+                    audio.currentTime + 10
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOAD THỜI LƯỢNG
+===================================================== */
+
+if (audio && duration) {
+
+    audio.addEventListener(
+        "loadedmetadata",
+        function() {
+
+            duration.textContent =
+                formatTime(audio.duration);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE PROGRESS
+===================================================== */
+
+if (audio && progress && currentTime) {
+
+    audio.addEventListener(
+        "timeupdate",
+        function() {
+
+            if (!audio.duration) return;
+
+            const percent =
+                (audio.currentTime /
+                 audio.duration) * 100;
+
+            progress.style.width =
+                percent + "%";
+
+            currentTime.textContent =
+                formatTime(audio.currentTime);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CLICK THANH PROGRESS
+===================================================== */
+
+if (progressBar && audio) {
+
+    progressBar.addEventListener(
+        "click",
+        function(event) {
+
+            if (!audio.duration) return;
+
+            const rect =
+                progressBar.getBoundingClientRect();
+
+            const clickPosition =
+                event.clientX - rect.left;
+
+            const percentage =
+                clickPosition / rect.width;
+
+            audio.currentTime =
+                percentage * audio.duration;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   VOLUME
+===================================================== */
+
+if (audio) {
+    audio.volume = 1;
+}
+
+if (volume && audio) {
+
+    volume.addEventListener(
+        "input",
+        function() {
+
+            audio.volume =
+                volume.value;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REPEAT BUTTON
+===================================================== */
+
+if (repeatButton && audio) {
+
+    repeatButton.addEventListener(
+        "click",
+        function() {
+
+            repeat = !repeat;
+
+            audio.loop = repeat;
+
+            if (repeat) {
+
+                repeatButton.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                repeatButton.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FAVORITE
+===================================================== */
+
+if (favoriteButton) {
+
+    favoriteButton.addEventListener(
+        "click",
+        function() {
+
+            favoriteButton.classList.toggle(
+                "liked"
             );
 
-    }
-);
+            if (
+                favoriteButton.classList.contains(
+                    "liked"
+                )
+            ) {
 
+                favoriteButton.textContent =
+                    "♥";
 
-/* =========================
-   LOAD THỜI LƯỢNG
-========================= */
+            } else {
 
-audio.addEventListener(
-    "loadedmetadata",
-    function() {
+                favoriteButton.textContent =
+                    "♡";
 
-        duration.textContent =
-            formatTime(audio.duration);
-
-    }
-);
-
-
-/* =========================
-   UPDATE PROGRESS
-========================= */
-
-audio.addEventListener(
-    "timeupdate",
-    function() {
-
-        if (!audio.duration) return;
-
-        const percent =
-            (audio.currentTime /
-             audio.duration) * 100;
-
-        progress.style.width =
-            percent + "%";
-
-        currentTime.textContent =
-            formatTime(audio.currentTime);
-
-    }
-);
-
-
-/* =========================
-   CLICK THANH PROGRESS
-========================= */
-
-progressBar.addEventListener(
-    "click",
-    function(event) {
-
-        if (!audio.duration) return;
-
-        const rect =
-            progressBar.getBoundingClientRect();
-
-        const clickPosition =
-            event.clientX - rect.left;
-
-        const percentage =
-            clickPosition / rect.width;
-
-        audio.currentTime =
-            percentage * audio.duration;
-
-    }
-);
-
-
-/* =========================
-   VOLUME
-========================= */
-
-audio.volume = 1;
-
-volume.addEventListener(
-    "input",
-    function() {
-
-        audio.volume =
-            volume.value;
-
-    }
-);
-
-
-/* =========================
-   REPEAT BUTTON
-========================= */
-
-repeatButton.addEventListener(
-    "click",
-    function() {
-
-        repeat = !repeat;
-
-        audio.loop = repeat;
-
-        if (repeat) {
-
-            repeatButton.classList.add("active");
-
-        } else {
-
-            repeatButton.classList.remove("active");
+            }
 
         }
+    );
 
-    }
-);
-
-
-/* =========================
-   FAVORITE
-========================= */
-
-favoriteButton.addEventListener(
-    "click",
-    function() {
-
-        favoriteButton.classList.toggle("liked");
-
-        if (
-            favoriteButton.classList.contains("liked")
-        ) {
-
-            favoriteButton.textContent = "♥";
-
-        } else {
-
-            favoriteButton.textContent = "♡";
-
-        }
-
-    }
-);
+}
 
 
-/* =========================
+/* =====================================================
    KHI PLAY
-========================= */
+===================================================== */
 
-audio.addEventListener(
-    "play",
-    function() {
+if (audio && playButton) {
 
-        playButton.textContent = "❚❚";
+    audio.addEventListener(
+        "play",
+        function() {
 
-    }
-);
+            playButton.textContent =
+                "❚❚";
+
+        }
+    );
+
+}
 
 
-/* =========================
+/* =====================================================
    KHI PAUSE
-========================= */
+===================================================== */
 
-audio.addEventListener(
-    "pause",
-    function() {
+if (audio && playButton) {
 
-        playButton.textContent = "▶";
+    audio.addEventListener(
+        "pause",
+        function() {
 
-    }
-);
+            playButton.textContent =
+                "▶";
+
+        }
+    );
+
+}
 
 
-/* =========================
+/* =====================================================
    FORMAT TIME
-========================= */
+===================================================== */
 
 function formatTime(seconds) {
 
@@ -327,17 +389,25 @@ function formatTime(seconds) {
 ===================================================== */
 
 
-/* =========================
-   LẤY 4 APP ICON
-========================= */
+/* =====================================================
+   LẤY 4 APP
+===================================================== */
 
 const appItems =
     document.querySelectorAll(".app-item");
 
 
-/* =========================
+/* =====================================================
+   BACKGROUND OVERLAY
+===================================================== */
+
+const appOverlay =
+    document.getElementById("app-overlay");
+
+
+/* =====================================================
    HÀM MỞ WINDOW
-========================= */
+===================================================== */
 
 function openAppWindow(windowId) {
 
@@ -346,13 +416,28 @@ function openAppWindow(windowId) {
 
     if (!windowElement) return;
 
+
+    /* Mở cửa sổ */
+
     windowElement.classList.add("open");
+
+
+    /* Làm blur background */
+
+    if (appOverlay) {
+
+        appOverlay.classList.add(
+            "active"
+        );
+
+    }
+
 }
 
 
-/* =========================
+/* =====================================================
    HÀM ĐÓNG WINDOW
-========================= */
+===================================================== */
 
 function closeAppWindow(windowId) {
 
@@ -361,20 +446,37 @@ function closeAppWindow(windowId) {
 
     if (!windowElement) return;
 
-    windowElement.classList.remove("open");
+
+    /* Đóng cửa sổ */
+
+    windowElement.classList.remove(
+        "open"
+    );
+
+
+    /* Tắt blur */
+
+    if (appOverlay) {
+
+        appOverlay.classList.remove(
+            "active"
+        );
+
+    }
+
 }
 
 
-/* =========================
+/* =====================================================
    CLICK 4 APP
-========================= */
+===================================================== */
 
 appItems.forEach(
     function(app, index) {
 
         app.addEventListener(
             "click",
-            function() {
+            function(event) {
 
                 /*
                     APP 1 → MEMORIES
@@ -382,6 +484,7 @@ appItems.forEach(
                     APP 3 → TIN NHẮN
                     APP 4 → LỊCH
                 */
+
 
                 if (index === 0) {
 
@@ -391,6 +494,7 @@ appItems.forEach(
 
                 }
 
+
                 else if (index === 1) {
 
                     openAppWindow(
@@ -399,6 +503,7 @@ appItems.forEach(
 
                 }
 
+
                 else if (index === 2) {
 
                     openAppWindow(
@@ -406,6 +511,7 @@ appItems.forEach(
                     );
 
                 }
+
 
                 else if (index === 3) {
 
@@ -422,9 +528,46 @@ appItems.forEach(
 );
 
 
-/* =========================
+/* =====================================================
+   CLICK OVERLAY → ĐÓNG WINDOW
+===================================================== */
+
+if (appOverlay) {
+
+    appOverlay.addEventListener(
+        "click",
+        function() {
+
+            const openWindows =
+                document.querySelectorAll(
+                    ".app-window.open"
+                );
+
+
+            openWindows.forEach(
+                function(windowElement) {
+
+                    windowElement.classList.remove(
+                        "open"
+                    );
+
+                }
+            );
+
+
+            appOverlay.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
    NÚT ĐÓNG 🔴
-========================= */
+===================================================== */
 
 const closeButtons =
     document.querySelectorAll(
@@ -444,7 +587,9 @@ closeButtons.forEach(
                 const windowId =
                     button.dataset.window;
 
-                closeAppWindow(windowId);
+                closeAppWindow(
+                    windowId
+                );
 
             }
         );
