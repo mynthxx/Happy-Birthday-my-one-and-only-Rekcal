@@ -1208,3 +1208,228 @@ body {
         font-size: 24px;
     }
 }
+
+/* =====================================================
+   CALENDAR APP — LOVE COUNTER
+   BACKGROUND: calendar-background.jpg
+===================================================== */
+
+.calendar-content {
+    position: relative;
+
+    width: 100%;
+    height: calc(100% - 48px);
+
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    background: #fff8e8;
+}
+
+
+/* =====================================================
+   CALENDAR BACKGROUND
+===================================================== */
+
+.calendar-background {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    display: block;
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   LOVE COUNTER — CONTENT
+===================================================== */
+
+.love-counter {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 86%;
+
+    text-align: center;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   "TỤI MÌNH ĐÃ Ở BÊN NHAU ĐƯỢC"
+===================================================== */
+
+.counter-intro {
+    margin: 0 0 28px;
+
+    font-size: clamp(30px, 3.5vw, 50px);
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    color: #4a2925;
+
+    letter-spacing: -0.5px;
+
+    text-shadow:
+        0 2px 8px rgba(255, 255, 255, 0.85);
+}
+
+
+/* =====================================================
+   TIME
+===================================================== */
+
+.counter-time {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: clamp(10px, 1.8vw, 25px);
+
+    flex-wrap: nowrap;
+}
+
+
+/* =====================================================
+   TỪNG ĐƠN VỊ
+===================================================== */
+
+.time-box {
+    min-width: 70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   CON SỐ
+===================================================== */
+
+.time-box span {
+    display: block;
+
+    font-size: clamp(28px, 3.4vw, 50px);
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    color: #5a2525;
+
+    font-variant-numeric: tabular-nums;
+
+    text-shadow:
+        0 2px 7px rgba(255, 255, 255, 0.9);
+}
+
+
+/* =====================================================
+   ĐƠN VỊ: NĂM / THÁNG / NGÀY...
+===================================================== */
+
+.time-box small {
+    display: block;
+
+    margin-top: 9px;
+
+    font-size: clamp(11px, 1vw, 14px);
+
+    font-weight: 600;
+
+    color: #713c36;
+
+    letter-spacing: 0.5px;
+
+    text-shadow:
+        0 1px 5px rgba(255, 255, 255, 0.9);
+}
+
+
+/* =====================================================
+   "VÀ SẼ CÒN Ở BÊN NHAU ĐẾN SUỐT ĐỜI"
+===================================================== */
+
+.counter-ending {
+    margin: 32px 0 0;
+
+    font-size: clamp(18px, 1.8vw, 27px);
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    color: #63332e;
+
+    text-shadow:
+        0 2px 8px rgba(255, 255, 255, 0.9);
+}
+
+
+/* =====================================================
+   MOBILE / CỬA SỔ NHỎ
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .love-counter {
+        width: 92%;
+    }
+
+    .counter-intro {
+        margin-bottom: 22px;
+    }
+
+    .counter-time {
+        gap: 7px;
+    }
+
+    .time-box {
+        min-width: 48px;
+    }
+
+    .counter-ending {
+        margin-top: 24px;
+    }
+}
+
+
+/* =====================================================
+   MÀN HÌNH RẤT NHỎ
+===================================================== */
+
+@media (max-width: 560px) {
+
+    .counter-time {
+        flex-wrap: wrap;
+
+        row-gap: 16px;
+    }
+
+    .time-box {
+        min-width: 55px;
+    }
+}
