@@ -733,3 +733,161 @@ document.addEventListener(
 
     }
 );
+
+/* =====================================================
+   CALENDAR — LOVE COUNTER
+   BẮT ĐẦU: 27/02/2024 — 22:00
+   MÚI GIỜ: VIỆT NAM
+===================================================== */
+
+const loveStart =
+    new Date("2024-02-27T22:00:00+07:00");
+
+
+function updateLoveCounter() {
+
+    const now = new Date();
+
+    let years =
+        now.getFullYear() -
+        loveStart.getFullYear();
+
+    let months =
+        now.getMonth() -
+        loveStart.getMonth();
+
+    let days =
+        now.getDate() -
+        loveStart.getDate();
+
+    let hours =
+        now.getHours() -
+        loveStart.getHours();
+
+    let minutes =
+        now.getMinutes() -
+        loveStart.getMinutes();
+
+    let seconds =
+        now.getSeconds() -
+        loveStart.getSeconds();
+
+
+    /* =========================
+       ĐIỀU CHỈNH GIÁ TRỊ ÂM
+    ========================= */
+
+    if (seconds < 0) {
+
+        seconds += 60;
+        minutes--;
+
+    }
+
+
+    if (minutes < 0) {
+
+        minutes += 60;
+        hours--;
+
+    }
+
+
+    if (hours < 0) {
+
+        hours += 24;
+        days--;
+
+    }
+
+
+    if (days < 0) {
+
+        const previousMonth =
+            new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                0
+            );
+
+        days +=
+            previousMonth.getDate();
+
+        months--;
+
+    }
+
+
+    if (months < 0) {
+
+        months += 12;
+        years--;
+
+    }
+
+
+    /* =========================
+       HIỂN THỊ
+    ========================= */
+
+    const yearsElement =
+        document.getElementById("love-years");
+
+    const monthsElement =
+        document.getElementById("love-months");
+
+    const daysElement =
+        document.getElementById("love-days");
+
+    const hoursElement =
+        document.getElementById("love-hours");
+
+    const minutesElement =
+        document.getElementById("love-minutes");
+
+    const secondsElement =
+        document.getElementById("love-seconds");
+
+
+    if (yearsElement) {
+        yearsElement.textContent = years;
+    }
+
+    if (monthsElement) {
+        monthsElement.textContent = months;
+    }
+
+    if (daysElement) {
+        daysElement.textContent = days;
+    }
+
+    if (hoursElement) {
+        hoursElement.textContent = hours;
+    }
+
+    if (minutesElement) {
+        minutesElement.textContent = minutes;
+    }
+
+    if (secondsElement) {
+        secondsElement.textContent = seconds;
+    }
+
+}
+
+
+/* =========================
+   CHẠY NGAY
+========================= */
+
+updateLoveCounter();
+
+
+/* =========================
+   CẬP NHẬT MỖI GIÂY
+========================= */
+
+setInterval(
+    updateLoveCounter,
+    1000
+);
