@@ -577,48 +577,496 @@
          SAFARI WINDOW
     ========================== -->
 
-    <div
-        class="app-window"
-        id="safari-window"
-    >
+    <!-- =====================================================
+     SAFARI — LITTLE CAT HOUSE
+===================================================== -->
 
-        <div class="window-header">
+<div class="app-window" id="safari-window">
 
-            <div class="window-buttons">
+    <!-- MAC WINDOW HEADER -->
+    <div class="window-header">
 
-                <span
-                    class="window-close"
-                    data-window="safari-window"
-                ></span>
+        <div class="window-buttons">
+            <span
+                class="window-close"
+                data-window="safari-window">
+            </span>
 
-                <span class="window-minimize"></span>
-
-                <span class="window-maximize"></span>
-
-            </div>
-
-
-            <div class="window-title">
-                Safari
-            </div>
-
+            <span class="window-minimize"></span>
+            <span class="window-maximize"></span>
         </div>
 
+        <div class="window-title">
+            Safari
+        </div>
 
-        <div class="window-content">
-
-            <h1>
-                Our Future 🌱
-            </h1>
+    </div>
 
 
-            <p>
-                Những điều hai đứa muốn cùng nhau thực hiện.
-            </p>
+    <!-- SAFARI CONTENT -->
+    <div class="window-content safari-content">
+
+        <div id="cat-game" class="cat-game">
+
+
+            <!-- =================================================
+                 1. ADOPT SCREEN
+            ================================================== -->
+
+            <section
+                id="adopt-screen"
+                class="cat-screen"
+            >
+
+                <div class="cat-game-top">
+
+                    <div class="cat-pixel-label">
+                        ✦ LITTLE CAT HOUSE ✦
+                    </div>
+
+                    <h1>
+                        Adopt a little baby 🐾
+                    </h1>
+
+                    <p>
+                        Chọn một bé mèo để bắt đầu cuộc sống cùng nhau.
+                    </p>
+
+                </div>
+
+
+                <!-- DANH SÁCH MÈO -->
+                <div
+                    id="cat-choice-grid"
+                    class="cat-choice-grid"
+                ></div>
+
+
+                <!-- NÚT ADOPT -->
+                <button
+                    id="adopt-continue"
+                    class="pixel-btn"
+                    disabled
+                >
+                    ADOPT ♡
+                </button>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 2. NAME SCREEN
+            ================================================== -->
+
+            <section
+                id="name-screen"
+                class="cat-screen hidden"
+            >
+
+                <div class="name-layout">
+
+
+                    <!-- PREVIEW BÉ MÈO -->
+                    <div
+                        id="name-preview"
+                        class="name-preview"
+                    ></div>
+
+
+                    <!-- FORM ĐẶT TÊN -->
+                    <div class="name-card">
+
+                        <div class="cat-pixel-label">
+                            ✦ ONE LITTLE FAMILY ✦
+                        </div>
+
+                        <h1>
+                            Đặt tên cho bé ♡
+                        </h1>
+
+                        <p>
+                            Tên này sẽ được lưu lại cho lần sau.
+                        </p>
+
+                        <input
+                            id="cat-name-input"
+                            type="text"
+                            maxlength="16"
+                            placeholder="Ví dụ: Mochi..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            id="name-confirm"
+                            class="pixel-btn"
+                        >
+                            WELCOME HOME ♡
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 3. HOME / PET SCREEN
+            ================================================== -->
+
+            <section
+                id="home-screen"
+                class="cat-screen hidden"
+            >
+
+
+                <!-- HEADER -->
+                <div class="pet-header">
+
+                    <div>
+
+                        <div class="cat-pixel-label">
+                            ✦ LITTLE CAT HOUSE ✦
+                        </div>
+
+                        <h1 id="pet-title">
+                            My little baby
+                        </h1>
+
+                        <p id="pet-message">
+                            Hôm nay mình chơi gì với bé nhỉ?
+                        </p>
+
+                    </div>
+
+
+                    <!-- HEART WALLET -->
+                    <div class="heart-wallet">
+                        ♡
+                        <span id="heart-count">0</span>
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PET ROOM
+                ================================================== -->
+
+                <div class="pet-room">
+
+                    <div class="room-decor decor-left">
+                        🌿
+                        <br>
+                        🪴
+                    </div>
+
+
+                    <!-- BÉ MÈO -->
+                    <div class="pet-stage">
+
+                        <div
+                            id="pet-sprite"
+                            class="pet-sprite"
+                        ></div>
+
+                        <div
+                            id="pet-status"
+                            class="pet-status"
+                        >
+                            😺 HAPPY
+                        </div>
+
+                    </div>
+
+
+                    <div class="room-decor decor-right">
+                        🧸
+                        <br>
+                        🧺
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <div class="action-grid">
+
+
+                    <!-- CHO ĂN HẠT -->
+                    <button
+                        class="action-card"
+                        data-action="kibble"
+                    >
+
+                        <span>🍚</span>
+
+                        <b>
+                            Cho ăn hạt
+                        </b>
+
+                        <small>
+                            +2 ❤️
+                        </small>
+
+                    </button>
+
+
+                    <!-- TẮM -->
+                    <button
+                        class="action-card"
+                        data-action="bath"
+                    >
+
+                        <span>🛁</span>
+
+                        <b>
+                            Tắm cho mèo
+                        </b>
+
+                        <small>
+                            +5 ❤️
+                        </small>
+
+                    </button>
+
+
+                    <!-- SÚP THƯỞNG -->
+                    <button
+                        class="action-card"
+                        data-action="soup"
+                    >
+
+                        <span>🥣</span>
+
+                        <b>
+                            Súp thưởng
+                        </b>
+
+                        <small>
+                            +3 ❤️
+                        </small>
+
+                    </button>
+
+
+                    <!-- CHƠI -->
+                    <button
+                        class="action-card"
+                        data-action="play"
+                    >
+
+                        <span>🧶</span>
+
+                        <b>
+                            Chơi cùng bé
+                        </b>
+
+                        <small>
+                            +4 ❤️
+                        </small>
+
+                    </button>
+
+
+                    <!-- NỰNG -->
+                    <button
+                        class="action-card"
+                        data-action="pet"
+                    >
+
+                        <span>🥰</span>
+
+                        <b>
+                            Nựng mèo
+                        </b>
+
+                        <small>
+                            +2 ❤️
+                        </small>
+
+                    </button>
+
+
+                    <!-- NGỦ -->
+                    <button
+                        class="action-card"
+                        data-action="sleep"
+                    >
+
+                        <span>💤</span>
+
+                        <b>
+                            Cho bé ngủ
+                        </b>
+
+                        <small>
+                            +3 ❤️
+                        </small>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- BOTTOM BUTTONS -->
+                <div class="game-bottom">
+
+                    <button
+                        id="closet-open"
+                        class="shop-btn"
+                    >
+                        🛍 CAT CLOSET
+                    </button>
+
+                    <button
+                        id="reset-pet"
+                        class="text-btn"
+                    >
+                        Reset pet
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 4. CAT CLOSET
+            ================================================== -->
+
+            <section
+                id="closet-screen"
+                class="cat-screen hidden"
+            >
+
+
+                <!-- HEADER -->
+                <div class="pet-header">
+
+                    <div>
+
+                        <div class="cat-pixel-label">
+                            ✦ CAT CLOSET ✦
+                        </div>
+
+                        <h1>
+                            Đồ cho bé 🧺
+                        </h1>
+
+                        <p>
+                            Dùng trái tim để mua outfit.
+                        </p>
+
+                    </div>
+
+
+                    <!-- HEART WALLET -->
+                    <div class="heart-wallet">
+
+                        ♡
+
+                        <span id="closet-heart-count">
+                            0
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OUTFIT STORE -->
+                <div
+                    id="closet-grid"
+                    class="closet-grid"
+                ></div>
+
+
+
+                <!-- BACK -->
+                <button
+                    id="closet-back"
+                    class="pixel-btn secondary"
+                >
+                    ← VỀ NHÀ
+                </button>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 5. MINI GAME MODAL
+            ================================================== -->
+
+            <div
+                id="mini-modal"
+                class="mini-modal hidden"
+            >
+
+                <div class="mini-card">
+
+
+                    <!-- CLOSE -->
+                    <button
+                        id="mini-close"
+                        class="mini-close"
+                    >
+                        ×
+                    </button>
+
+
+                    <!-- ICON -->
+                    <div
+                        id="mini-icon"
+                        class="mini-icon"
+                    >
+                        🐾
+                    </div>
+
+
+                    <!-- TITLE -->
+                    <h2 id="mini-title">
+                        Activity
+                    </h2>
+
+
+                    <!-- INSTRUCTION -->
+                    <p id="mini-instruction"></p>
+
+
+                    <!-- MINI GAME -->
+                    <div
+                        id="mini-game-area"
+                    ></div>
+
+
+                    <!-- REWARD -->
+                    <div
+                        id="mini-reward"
+                        class="mini-reward hidden"
+                    ></div>
+
+                </div>
+
+            </div>
+
 
         </div>
 
     </div>
+
+</div>
 
 
 
