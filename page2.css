@@ -1240,10 +1240,18 @@ body {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
-    object-position: center center;
-
     display: block;
+
+    /*
+       QUAN TRỌNG:
+       Không crop ảnh nữa.
+       Ảnh background đã được thiết kế sẵn
+       nên phải hiển thị toàn bộ.
+    */
+
+    object-fit: fill;
+
+    object-position: center;
 
     z-index: 0;
 }
@@ -1254,77 +1262,91 @@ body {
 ===================================================== */
 
 .love-counter {
-
     position: absolute;
+
+    /*
+       Đặt chính xác vào vùng trung tâm
+       của background.
+    */
 
     top: 51%;
     left: 50%;
 
     transform: translate(-50%, -50%);
 
-    /*
-       Chỉ sử dụng vùng trống ở chính giữa
-       để không đè lên hình minh họa.
-    */
-
     width: 58%;
 
     text-align: center;
 
     z-index: 2;
+
+    color: #5a2525;
 }
 
 
 /* =====================================================
-   CÂU MỞ ĐẦU
+   TIÊU ĐỀ
+   "Tụi mình đã ở bên nhau được"
 ===================================================== */
 
 .counter-intro {
+    margin: 0 0 24px;
 
-    margin: 0 0 20px;
+    /*
+       Nhỏ hơn rất nhiều so với CSS cũ.
+       Background đã có nhiều chi tiết nên
+       chữ không cần chiếm quá nhiều diện tích.
+    */
 
-    font-size: 20px;
+    font-size: clamp(20px, 2.15vw, 34px);
 
     font-weight: 700;
 
-    line-height: 1.25;
+    line-height: 1.2;
 
-    color: #4a2925;
+    color: #632b27;
 
-    letter-spacing: -0.2px;
+    letter-spacing: -0.4px;
 
     text-shadow:
-        0 2px 6px rgba(255, 255, 255, 0.9);
+        0 2px 5px rgba(255, 255, 255, 0.9);
 }
 
 
 /* =====================================================
-   DÃY THỜI GIAN
+   6 MỐC THỜI GIAN
 ===================================================== */
 
 .counter-time {
+    display: grid;
 
-    display: flex;
+    /*
+       3 cột × 2 hàng
+       giống bố cục hình mẫu.
+    */
 
-    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
 
-    align-items: flex-start;
+    grid-template-rows: repeat(2, auto);
 
-    gap: 12px;
+    justify-items: center;
+    align-items: center;
 
-    flex-wrap: nowrap;
+    column-gap: 18px;
+    row-gap: 20px;
 
     width: 100%;
 }
 
 
 /* =====================================================
-   TỪNG ĐƠN VỊ
+   TỪNG Ô THỜI GIAN
 ===================================================== */
 
 .time-box {
+    width: 100%;
 
-    min-width: 48px;
+    min-width: 0;
 
     display: flex;
 
@@ -1334,7 +1356,11 @@ body {
 
     justify-content: center;
 
-    flex: 1;
+    /*
+       Không dùng background ở đây.
+       Phần nền trang trí đã nằm trong
+       calendar-background.jpg.
+    */
 }
 
 
@@ -1343,21 +1369,27 @@ body {
 ===================================================== */
 
 .time-box span {
-
     display: block;
 
-    font-size: 38px;
+    /*
+       SỐ NHỎ LẠI.
+       Đây là phần trước đó bị "to quá".
+    */
+
+    font-size: clamp(30px, 3vw, 46px);
 
     font-weight: 700;
 
     line-height: 1;
 
-    color: #5a2525;
+    color: #6b2925;
 
     font-variant-numeric: tabular-nums;
 
+    letter-spacing: -1px;
+
     text-shadow:
-        0 2px 6px rgba(255, 255, 255, 0.9);
+        0 2px 5px rgba(255, 255, 255, 0.9);
 }
 
 
@@ -1366,207 +1398,140 @@ body {
 ===================================================== */
 
 .time-box small {
-
     display: block;
 
     margin-top: 7px;
 
-    font-size: 12px;
+    font-size: clamp(10px, 0.9vw, 13px);
 
-    font-weight: 600;
+    font-weight: 700;
 
-    line-height: 1.2;
+    line-height: 1.1;
 
     color: #713c36;
 
     letter-spacing: 0.3px;
 
     text-shadow:
-        0 1px 5px rgba(255, 255, 255, 0.9);
+        0 1px 4px rgba(255, 255, 255, 0.9);
 }
 
 
 /* =====================================================
-   CÂU KẾT
+   CÂU CUỐI
+   "và sẽ còn ở bên nhau đến suốt đời ♡"
 ===================================================== */
 
 .counter-ending {
+    margin: 24px 0 0;
 
-    margin: 22px 0 0;
+    font-size: clamp(14px, 1.35vw, 21px);
 
-    font-size: 17px;
-
-    font-weight: 600;
+    font-weight: 700;
 
     line-height: 1.35;
 
-    color: #63332e;
+    color: #71332e;
 
     text-shadow:
-        0 2px 7px rgba(255, 255, 255, 0.9);
+        0 2px 6px rgba(255, 255, 255, 0.9);
 }
 
 
 /* =====================================================
-   CỬA SỔ NHỎ
+   CALENDAR WINDOW RIÊNG
 ===================================================== */
 
-@media (max-width: 800px) {
+/*
+   Background của bạn có tỉ lệ khá ngang.
+   Cho cửa sổ rộng hơn để hình không bị cảm giác
+   chật và các chi tiết hai bên không bị mất.
+*/
+
+#calendar-window {
+    width: min(1000px, 88vw);
+
+    /*
+       Giữ cửa sổ đủ cao cho background.
+    */
+
+    height: min(700px, 78vh);
+}
+
+
+/* =====================================================
+   RESPONSIVE — MÀN HÌNH NHỎ
+===================================================== */
+
+@media (max-width: 900px) {
+
+    #calendar-window {
+        width: 94vw;
+        height: 78vh;
+    }
 
     .love-counter {
-
-        width: 68%;
-
-        top: 51%;
+        width: 62%;
     }
 
     .counter-intro {
-
-        font-size: 17px;
-
-        margin-bottom: 17px;
+        font-size: clamp(18px, 3vw, 28px);
+        margin-bottom: 18px;
     }
 
     .counter-time {
-
-        gap: 7px;
-    }
-
-    .time-box {
-
-        min-width: 38px;
+        column-gap: 10px;
+        row-gap: 16px;
     }
 
     .time-box span {
-
-        font-size: 28px;
-    }
-
-    .time-box small {
-
-        font-size: 10px;
-
-        margin-top: 6px;
+        font-size: clamp(25px, 4vw, 38px);
     }
 
     .counter-ending {
-
         margin-top: 18px;
-
-        font-size: 14px;
+        font-size: clamp(12px, 2vw, 18px);
     }
 }
 
 
 /* =====================================================
-   MÀN HÌNH RẤT NHỎ
+   MOBILE
 ===================================================== */
 
 @media (max-width: 560px) {
 
-    .love-counter {
+    #calendar-window {
+        width: 96vw;
+        height: 72vh;
+    }
 
-        width: 78%;
+    .love-counter {
+        width: 65%;
+    }
+
+    .counter-intro {
+        font-size: 17px;
+
+        margin-bottom: 14px;
     }
 
     .counter-time {
-
-        gap: 4px;
+        column-gap: 5px;
+        row-gap: 12px;
     }
 
     .time-box span {
-
-        font-size: 23px;
+        font-size: 25px;
     }
 
     .time-box small {
-
         font-size: 9px;
     }
 
     .counter-ending {
+        margin-top: 15px;
 
-        font-size: 13px;
+        font-size: 12px;
     }
-}
-
-/* =====================================================
-   FINAL FIX — CALENDAR LOVE COUNTER
-===================================================== */
-
-.calendar-content .love-counter {
-    width: 58% !important;
-    top: 51% !important;
-}
-
-
-/* CÂU "TỤI MÌNH ĐÃ Ở BÊN NHAU ĐƯỢC" */
-
-.calendar-content .counter-intro {
-    margin: 0 0 16px !important;
-
-    font-size: 16px !important;
-
-    line-height: 1.2 !important;
-
-    font-weight: 700 !important;
-}
-
-
-/* DÃY SỐ */
-
-.calendar-content .counter-time {
-    display: flex !important;
-
-    justify-content: center !important;
-
-    align-items: flex-start !important;
-
-    gap: 8px !important;
-
-    flex-wrap: nowrap !important;
-}
-
-
-/* TỪNG Ô */
-
-.calendar-content .time-box {
-    min-width: 42px !important;
-
-    flex: 1 !important;
-}
-
-
-/* SỐ */
-
-.calendar-content .time-box span {
-    font-size: 30px !important;
-
-    line-height: 1 !important;
-
-    font-weight: 700 !important;
-}
-
-
-/* NĂM / THÁNG / NGÀY... */
-
-.calendar-content .time-box small {
-    margin-top: 5px !important;
-
-    font-size: 10px !important;
-
-    line-height: 1.1 !important;
-}
-
-
-/* CÂU CUỐI */
-
-.calendar-content .counter-ending {
-    margin: 16px 0 0 !important;
-
-    font-size: 14px !important;
-
-    line-height: 1.3 !important;
-
-    font-weight: 600 !important;
 }
