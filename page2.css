@@ -1590,19 +1590,23 @@ body {
 .cat-options {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 30px 45px;
     margin: 30px 0;
 }
 
+/* Ô chứa mèo — không có viền */
 .cat-option {
     cursor: pointer;
-    padding: 12px;
-    border: 2px solid transparent;
+    padding: 10px;
+    border: none;
+    outline: none;
     border-radius: 16px;
-    transition: 0.2s ease;
+    background: transparent;
     text-align: center;
+    transition: transform 0.2s ease;
 }
 
+/* Ảnh mèo */
 .cat-option img {
     width: 120px;
     height: 120px;
@@ -1610,16 +1614,45 @@ body {
     display: block;
     margin: auto;
     cursor: pointer;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    image-rendering: pixelated;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
 }
 
+/* Hover — nhích lên nhẹ */
 .cat-option:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
-.cat-option.selected {
-    border-color: #8b6375;
-    background: rgba(255, 255, 255, 0.5);
+.cat-option:hover img {
     transform: scale(1.05);
+}
+
+/* Mèo đang được chọn */
+.cat-option.selected {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+/* Khi chọn: chỉ làm mèo nổi bật nhẹ */
+.cat-option.selected img {
+    transform: scale(1.08);
+    filter: drop-shadow(0 4px 4px rgba(90, 65, 80, 0.18));
+}
+
+/* Không cho trình duyệt tạo viền focus mặc định */
+.cat-option:focus,
+.cat-option:focus-visible {
+    outline: none;
+    border: none;
 }
 
 .cat-sprite {
