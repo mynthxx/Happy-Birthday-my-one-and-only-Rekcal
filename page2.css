@@ -1884,7 +1884,7 @@ body {
 .progress-dots { font-size: 18px; letter-spacing: 6px; color:#e48b99; }
 
 @media (max-width: 650px) {
-  .cat-choice-grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-options-grid { grid-template-columns: repeat(2, 1fr); }
   .action-grid { grid-template-columns: repeat(2, 1fr); }
   .closet-grid { grid-template-columns: repeat(2, 1fr); }
   .name-layout { grid-template-columns: 1fr; }
