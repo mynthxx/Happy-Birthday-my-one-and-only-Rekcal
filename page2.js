@@ -893,1418 +893,447 @@ setInterval(
 );
 
 /* =====================================================
-   LITTLE CAT HOUSE — SAFARI MINI GAME
+   LITTLE CAT HOUSE — COMPACT JS
+   Player Storage + Cat House + Cat Closet
    ===================================================== */
-
 document.addEventListener("DOMContentLoaded", function () {
+    if (!document.querySelector(".cat-game")) return;
 
-    /*
-     * Nếu trang hiện tại không phải Little Cat House
-     * thì không chạy phần game này.
-     */
-    const hasCatGame =
-        document.querySelector(".cat-game") ||
-        document.querySelector("#adopt-button") ||
-        document.querySelector(".cat-option") ||
-        document.querySelector("[data-cat]");
+    const $ = s => document.querySelector(s);
+    const $$ = s => [...document.querySelectorAll(s)];
+    const PLAYERS_KEY = "littleCatHousePlayers";
+    const ACTIVE_KEY = "littleCatHouseActivePlayer";
 
-    if (!hasCatGame) return;
+    const screens = {
+        player: $("#player-screen"),
+        playerName: $("#player-name-screen"),
+        adopt: $("#adopt-screen"),
+        naming: $("#naming-screen"),
+        home: $("#home-screen"),
+        closet: $("#closet-screen")
+    };
 
+    const cats = {
+        black: "cat-black.png",
+        calico: "cat-calico.png",
+        graywhite: "cat-graywhite.png",
+        orange: "cat-orange.png",
+        siamese: "cat-siamese.png",
+        tri: "cat-tri.png",
+        tuxedo: "cat-tuxedo.png",
+        white: "cat-white.png"
+    };
 
-    /* =====================================================
-       STORAGE
-    ===================================================== */
+    const outfits = [
+        { id: "outfit1", src: "outfit1.png", price: 10, name: "Little Bow" },
+        { id: "outfit2", src: "outfit2.png", price: 15, name: "Sweet Ribbon" },
+        { id: "outfit3", src: "outfit3.png", price: 20, name: "Tiny Hat" },
+        { id: "outfit4", src: "outfit4.png", price: 25, name: "Pink Dream" },
+        { id: "outfit5", src: "outfit5.png", price: 30, name: "Cozy Look" },
+        { id: "outfit6", src: "outfit6.png", price: 35, name: "Berry Cat" },
+        { id: "outfit7", src: "outfit7.png", price: 40, name: "Royal Kitty" },
+        { id: "outfit8", src: "outfit8.png", price: 50, name: "Princess Cat" }
+    ];
 
-    const STORAGE_KEY = "littleCatHouse";
-
-
-    const defaultState = {
+    const defaultCat = () => ({
         adopted: false,
         cat: null,
         name: "My little baby",
         hearts: 0,
-        outfit: null,
         happiness: 100,
         hunger: 100,
-        cleanliness: 100
-    };
-
-
-    let state = loadState();
-
-
-    function loadState() {
-
-        try {
-
-            const saved =
-                localStorage.getItem(STORAGE_KEY);
-
-            if (!saved) {
-                return {
-                    ...defaultState
-                };
-            }
-
-            return {
-                ...defaultState,
-                ...JSON.parse(saved)
-            };
-
-        } catch (error) {
-
-            console.warn(
-                "Không thể đọc dữ liệu Little Cat House.",
-                error
-            );
-
-            return {
-                ...defaultState
-            };
-        }
-    }
-
-
-    function saveState() {
-
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(state)
-        );
-    }
-
-
-    /* =====================================================
-       ELEMENT HELPERS
-    ===================================================== */
-
-    function $(selector) {
-        return document.querySelector(selector);
-    }
-
-
-    function $all(selector) {
-        return document.querySelectorAll(selector);
-    }
-
-
-    function setText(selector, value) {
-
-        const element = $(selector);
-
-        if (element) {
-            element.textContent = value;
-        }
-    }
-
-
-    /* =====================================================
-       MAIN ELEMENTS
-    ===================================================== */
-
-    const catImage =
-        $("#cat-image") ||
-        $(".cat-image");
-
-    const catName =
-        $("#cat-name") ||
-        $(".cat-name");
-
-    const heartCount =
-        $("#heart-count") ||
-        $(".heart-count");
-
-    const happiness =
-        $("#happiness") ||
-        $(".happiness");
-
-    const hunger =
-        $("#hunger") ||
-        $(".hunger");
-
-    const cleanliness =
-        $("#cleanliness") ||
-        $(".cleanliness");
-
-
-    /* =====================================================
-       SCREEN / SECTION
-    ===================================================== */
-
-    const adoptScreen =
-        $("#adopt-screen") ||
-        $(".adopt-screen");
-
-    const namingScreen =
-        $("#naming-screen") ||
-        $(".naming-screen");
-
-    const homeScreen =
-        $("#home-screen") ||
-        $(".home-screen");
-
-    const closetScreen =
-        $("#closet-screen") ||
-        $(".closet-screen");
-
-
-    function showScreen(screen) {
-
-        const screens = [
-            adoptScreen,
-            namingScreen,
-            homeScreen,
-            closetScreen
-        ];
-
-        screens.forEach(function (item) {
-
-            if (!item) return;
-
-            item.classList.remove("active");
-            item.style.display = "none";
-        });
-
-
-        if (!screen) return;
-
-
-        screen.classList.add("active");
-        screen.style.display = "";
-    }
-
-
-    /* =====================================================
-       CAT DATA
-    ===================================================== */
-
-    /*
-     * HTML có thể dùng:
-     *
-     * <div class="cat-option" data-cat="white" data-src="cat1.png">
-     *
-     * hoặc:
-     *
-     * <img class="cat-option"
-     *      data-cat="white"
-     *      src="cat1.png">
-     *
-     * JS sẽ tự đọc data-src.
-     */
-
-
-    let selectedCat = state.cat;
-
-
-    function getCatSource(element) {
-
-        if (!element) return null;
-
-
-        /*
-         * Nếu chính element là img
-         */
-        if (
-            element.tagName &&
-            element.tagName.toLowerCase() === "img"
-        ) {
-            return (
-                element.dataset.src ||
-                element.getAttribute("src")
-            );
-        }
-
-
-        /*
-         * Nếu bên trong có img
-         */
-        const image =
-            element.querySelector("img");
-
-
-        if (image) {
-
-            return (
-                element.dataset.src ||
-                image.dataset.src ||
-                image.getAttribute("src")
-            );
-        }
-
-
-        return element.dataset.src || null;
-    }
-
-
-    function getCatId(element) {
-
-        if (!element) return null;
-
-
-        return (
-            element.dataset.cat ||
-            element.dataset.catId ||
-            element.dataset.id ||
-            element.getAttribute("data-cat") ||
-            null
-        );
-    }
-
-
-    /* =====================================================
-       CAT SELECTION
-    ===================================================== */
-
-    const catOptions =
-        $all(".cat-option");
-
-
-    catOptions.forEach(function (option) {
-
-        option.addEventListener(
-            "click",
-            function () {
-
-                catOptions.forEach(function (item) {
-                    item.classList.remove("selected");
-                });
-
-
-                option.classList.add("selected");
-
-
-                selectedCat = {
-
-                    id:
-                        getCatId(option),
-
-                    src:
-                        getCatSource(option)
-                };
-
-
-                /*
-                 * Nếu có ảnh preview
-                 */
-                if (catImage && selectedCat.src) {
-
-                    catImage.src =
-                        selectedCat.src;
-                }
-
-
-                /*
-                 * Cho nút ADOPT hoạt động
-                 */
-                const adoptButton =
-                    $("#adopt-button") ||
-                    $("#adopt-btn") ||
-                    $(".adopt-button");
-
-
-                if (adoptButton) {
-
-                    adoptButton.disabled = false;
-
-                    adoptButton.classList.add(
-                        "ready"
-                    );
-                }
-            }
-        );
+        cleanliness: 100,
+        ownedOutfits: [],
+        outfit: null
     });
 
-
-    /* =====================================================
-       ADOPT
-    ===================================================== */
-
-    const adoptButton =
-        $("#adopt-button") ||
-        $("#adopt-btn") ||
-        $(".adopt-button");
-
-
-    if (adoptButton) {
-
-        adoptButton.addEventListener(
-            "click",
-            function () {
-
-                if (!selectedCat) {
-
-                    alert(
-                        "Hãy chọn một bé mèo trước nha 🐱"
-                    );
-
-                    return;
-                }
-
-
-                state.cat =
-                    selectedCat;
-
-                state.adopted =
-                    true;
-
-
-                saveState();
-
-
-                /*
-                 * Sang màn đặt tên
-                 */
-                showScreen(namingScreen);
-            }
-        );
+    function getPlayers() {
+        try { return JSON.parse(localStorage.getItem(PLAYERS_KEY)) || []; }
+        catch { return []; }
     }
 
-
-    /* =====================================================
-       NAME PET
-    ===================================================== */
-
-    const nameInput =
-        $("#pet-name-input") ||
-        $("#pet-name") ||
-        $(".pet-name-input");
-
-
-    const nameButton =
-        $("#name-button") ||
-        $("#name-btn") ||
-        $(".name-button");
-
-
-    function savePetName() {
-
-        if (!nameInput) return;
-
-
-        let name =
-            nameInput.value.trim();
-
-
-        if (!name) {
-
-            name = "My little baby";
-        }
-
-
-        state.name = name;
-
-
-        saveState();
-
-
-        updateUI();
-
-
-        showScreen(homeScreen);
+    function savePlayers(players) {
+        localStorage.setItem(PLAYERS_KEY, JSON.stringify(players));
     }
 
-
-    if (nameButton) {
-
-        nameButton.addEventListener(
-            "click",
-            savePetName
-        );
+    function activeId() {
+        return localStorage.getItem(ACTIVE_KEY);
     }
 
-
-    if (nameInput) {
-
-        nameInput.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key === "Enter") {
-
-                    savePetName();
-                }
-            }
-        );
+    function setActiveId(id) {
+        localStorage.setItem(ACTIVE_KEY, id);
     }
 
-
-    /* =====================================================
-       HEARTS
-    ===================================================== */
-
-    function addHearts(amount) {
-
-        amount =
-            Number(amount) || 0;
-
-
-        state.hearts += amount;
-
-
-        saveState();
-
-
-        updateUI();
-
-
-        showReward(amount);
+    function currentPlayer() {
+        const players = getPlayers();
+        return players.find(p => p.id === activeId()) || null;
     }
 
-
-    function showReward(amount) {
-
-        /*
-         * Tìm khu vực game
-         */
-        const container =
-            $(".cat-game") ||
-            document.body;
-
-
-        const reward =
-            document.createElement("div");
-
-
-        reward.className =
-            "heart-reward-popup";
-
-
-        reward.textContent =
-            "+" + amount + " ❤️";
-
-
-        container.appendChild(reward);
-
-
-        setTimeout(function () {
-
-            reward.classList.add("show");
-
-        }, 10);
-
-
-        setTimeout(function () {
-
-            reward.remove();
-
-        }, 1000);
+    function updateCurrentPlayer(data) {
+        const players = getPlayers();
+        const i = players.findIndex(p => p.id === activeId());
+        if (i < 0) return;
+        players[i] = { ...players[i], ...data };
+        savePlayers(players);
     }
 
-
-    /* =====================================================
-       ACTIVITIES
-    ===================================================== */
-
-    /*
-     * HTML có thể dùng:
-     *
-     * <button data-action="feed" data-reward="2">
-     *
-     * hoặc:
-     *
-     * <button id="feed-button">
-     */
-
-
-    const activityButtons =
-        $all("[data-action]");
-
-
-    function performActivity(
-        action,
-        button
-    ) {
-
-        let reward =
-            Number(
-                button.dataset.reward
-            );
-
-
-        /*
-         * Nếu HTML không ghi reward
-         * thì random 2 → 5
-         */
-        if (
-            !Number.isFinite(reward) ||
-            reward <= 0
-        ) {
-
-            reward =
-                Math.floor(
-                    Math.random() * 4
-                ) + 2;
-        }
-
-
-        /* =========================
-           CHO ĂN
-        ========================= */
-
-        if (action === "feed") {
-
-            state.hunger =
-                Math.min(
-                    100,
-                    state.hunger + 25
-                );
-        }
-
-
-        /* =========================
-           TẮM
-        ========================= */
-
-        else if (action === "bath") {
-
-            state.cleanliness =
-                100;
-        }
-
-
-        /* =========================
-           SÚP THƯỞNG
-        ========================= */
-
-        else if (action === "soup") {
-
-            state.hunger =
-                Math.min(
-                    100,
-                    state.hunger + 15
-                );
-
-            state.happiness =
-                Math.min(
-                    100,
-                    state.happiness + 15
-                );
-        }
-
-
-        /* =========================
-           CHƠI
-        ========================= */
-
-        else if (action === "play") {
-
-            state.happiness =
-                Math.min(
-                    100,
-                    state.happiness + 25
-                );
-        }
-
-
-        /* =========================
-           NỰNG
-        ========================= */
-
-        else if (action === "pet") {
-
-            state.happiness =
-                Math.min(
-                    100,
-                    state.happiness + 15
-                );
-        }
-
-
-        /* =========================
-           NGỦ
-        ========================= */
-
-        else if (action === "sleep") {
-
-            state.happiness =
-                Math.min(
-                    100,
-                    state.happiness + 10
-                );
-
-            state.hunger =
-                Math.max(
-                    0,
-                    state.hunger - 5
-                );
-        }
-
-
-        addHearts(reward);
-
-
-        /*
-         * Animation nút
-         */
-        button.classList.add("activity-done");
-
-
-        setTimeout(function () {
-
-            button.classList.remove(
-                "activity-done"
-            );
-
-        }, 400);
-    }
-
-
-    activityButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    const action =
-                        button.dataset.action;
-
-
-                    if (!action) return;
-
-
-                    performActivity(
-                        action,
-                        button
-                    );
-                }
-            );
-        }
-    );
-
-
-    /* =====================================================
-       SUPPORT OLD BUTTON IDs
-       Nếu HTML đang dùng ID riêng
-    ===================================================== */
-
-    const oldActivities = {
-
-        "#feed-button": "feed",
-        "#bath-button": "bath",
-        "#soup-button": "soup",
-        "#play-button": "play",
-        "#pet-button": "pet",
-        "#sleep-button": "sleep",
-
-        "#feed-cat": "feed",
-        "#bath-cat": "bath",
-        "#give-soup": "soup",
-        "#play-cat": "play",
-        "#pet-cat": "pet",
-        "#sleep-cat": "sleep"
-    };
-
-
-    Object.entries(oldActivities)
-        .forEach(function ([selector, action]) {
-
-            const button = $(selector);
-
-
-            if (!button) return;
-
-
-            /*
-             * Không gắn trùng nếu button
-             * đã có data-action
-             */
-            if (button.dataset.action) return;
-
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    performActivity(
-                        action,
-                        button
-                    );
-                }
-            );
+    function showScreen(screen) {
+        Object.values(screens).forEach(s => {
+            if (!s) return;
+            s.classList.add("hidden");
+            s.classList.remove("active");
+            s.style.display = "none";
         });
-
-
-    /* =====================================================
-       CLOSET
-    ===================================================== */
-
-    const closetButton =
-        $("#closet-button") ||
-        $("#cat-closet-button") ||
-        $(".closet-button");
-
-
-    const backHomeButton =
-        $("#back-home") ||
-        $("#home-button") ||
-        $(".back-home");
-
-
-    if (closetButton) {
-
-        closetButton.addEventListener(
-            "click",
-            function () {
-
-                showScreen(closetScreen);
-
-                updateUI();
-            }
-        );
+        if (!screen) return;
+        screen.classList.remove("hidden");
+        screen.classList.add("active");
+        screen.style.display = "block";
     }
 
-
-    if (backHomeButton) {
-
-        backHomeButton.addEventListener(
-            "click",
-            function () {
-
-                showScreen(homeScreen);
-
-                updateUI();
-            }
-        );
-    }
-
-
-    /* =====================================================
-       OUTFITS
-    ===================================================== */
-
-    const outfitItems =
-        $all(".outfit-item");
-
-
-    function getOutfitPrice(item) {
-
-        const price =
-            Number(
-                item.dataset.price
-            );
-
-
-        if (
-            Number.isFinite(price) &&
-            price >= 0
-        ) {
-
-            return price;
-        }
-
-
-        return 10;
-    }
-
-
-    function getOutfitId(item) {
-
-        return (
-            item.dataset.outfit ||
-            item.dataset.outfitId ||
-            item.dataset.id ||
-            item.getAttribute("data-outfit") ||
-            null
-        );
-    }
-
-
-    function getOutfitSource(item) {
-
-        if (!item) return null;
-
-
-        const image =
-            item.querySelector("img");
-
-
-        if (image) {
-
-            return (
-                item.dataset.src ||
-                image.dataset.src ||
-                image.getAttribute("src")
-            );
-        }
-
-
-        return item.dataset.src || null;
-    }
-
-
-    function applyOutfit(
-        outfitId,
-        source
-    ) {
-
-        state.outfit = {
-
-            id: outfitId,
-
-            src: source
+    function makePlayer(name) {
+        const players = getPlayers();
+        const player = {
+            id: "player-" + Date.now() + "-" + Math.random().toString(16).slice(2),
+            name: name,
+            createdAt: Date.now(),
+            game: defaultCat()
         };
-
-
-        saveState();
-
-
-        updateUI();
+        players.push(player);
+        savePlayers(players);
+        setActiveId(player.id);
+        return player;
     }
 
-
-    outfitItems.forEach(
-        function (item) {
-
-            item.addEventListener(
-                "click",
-                function () {
-
-                    const outfitId =
-                        getOutfitId(item);
-
-
-                    const source =
-                        getOutfitSource(item);
-
-
-                    const price =
-                        getOutfitPrice(item);
-
-
-                    /*
-                     * Nếu outfit này đã mua
-                     */
-                    const owned =
-                        item.classList.contains(
-                            "owned"
-                        );
-
-
-                    if (owned) {
-
-                        applyOutfit(
-                            outfitId,
-                            source
-                        );
-
-                        return;
-                    }
-
-
-                    /*
-                     * Không đủ tim
-                     */
-                    if (
-                        state.hearts <
-                        price
-                    ) {
-
-                        alert(
-                            "Chưa đủ tim đâu nè 💗\n" +
-                            "Bé cần " +
-                            price +
-                            " ❤️ để mua món này."
-                        );
-
-                        return;
-                    }
-
-
-                    /*
-                     * Trừ tim
-                     */
-                    state.hearts -= price;
-
-
-                    /*
-                     * Đánh dấu đã mua
-                     */
-                    item.classList.add(
-                        "owned"
-                    );
-
-
-                    /*
-                     * Áp dụng outfit
-                     */
-                    applyOutfit(
-                        outfitId,
-                        source
-                    );
-
-
-                    /*
-                     * Lưu danh sách outfit đã mua
-                     */
-                    saveOwnedOutfit(
-                        outfitId
-                    );
-
-
-                    updateUI();
-                }
-            );
-        }
-    );
-
-
-    /* =====================================================
-       OWNED OUTFITS
-    ===================================================== */
-
-    function getOwnedOutfits() {
-
-        try {
-
-            const saved =
-                localStorage.getItem(
-                    "littleCatHouseOutfits"
-                );
-
-
-            if (!saved) {
-                return [];
-            }
-
-
-            return JSON.parse(saved);
-
-        } catch {
-
-            return [];
-        }
+    function nextPlayerNumber() {
+        return getPlayers().length + 1;
     }
 
+    /* PLAYER STORAGE */
+    function renderPlayers() {
+        const box = $("#player-list");
+        if (!box) return;
+        const players = getPlayers();
+        box.innerHTML = "";
 
-    function saveOwnedOutfit(
-        outfitId
-    ) {
-
-        if (!outfitId) return;
-
-
-        const owned =
-            getOwnedOutfits();
-
-
-        if (
-            !owned.includes(outfitId)
-        ) {
-
-            owned.push(outfitId);
-        }
-
-
-        localStorage.setItem(
-            "littleCatHouseOutfits",
-            JSON.stringify(owned)
-        );
-    }
-
-
-    function restoreOwnedOutfits() {
-
-        const owned =
-            getOwnedOutfits();
-
-
-        outfitItems.forEach(
-            function (item) {
-
-                const id =
-                    getOutfitId(item);
-
-
-                if (
-                    id &&
-                    owned.includes(id)
-                ) {
-
-                    item.classList.add(
-                        "owned"
-                    );
-                }
-            }
-        );
-    }
-
-
-    /* =====================================================
-       APPLY SAVED CAT
-    ===================================================== */
-
-    function updateCatImage() {
-
-        if (!catImage) return;
-
-
-        if (
-            state.outfit &&
-            state.outfit.src
-        ) {
-
-            catImage.src =
-                state.outfit.src;
-
+        if (!players.length) {
+            box.innerHTML = '<div class="player-empty">Chưa có player nào ♡<br>Tạo player đầu tiên nhé!</div>';
             return;
         }
 
-
-        if (
-            state.cat &&
-            state.cat.src
-        ) {
-
-            catImage.src =
-                state.cat.src;
-        }
+        players.forEach(player => {
+            const game = player.game || defaultCat();
+            const card = document.createElement("div");
+            card.className = "player-card" + (player.id === activeId() ? " active" : "");
+            card.innerHTML = `
+                <div class="player-card-cat">🐾</div>
+                <div class="player-card-name">${escapeHTML(player.name)}</div>
+                <div class="player-card-info">
+                    ${game.adopted ? "🐱 " + escapeHTML(game.name) : "🐣 Chưa nhận mèo"}<br>
+                    ❤️ ${game.hearts || 0}
+                </div>`;
+            card.addEventListener("click", () => selectPlayer(player.id));
+            box.appendChild(card);
+        });
     }
 
-
-    /* =====================================================
-       UPDATE UI
-    ===================================================== */
-
-    function updateUI() {
-
-        /*
-         * Tên
-         */
-        setText(
-            "#cat-name",
-            state.name
-        );
-
-        setText(
-            ".cat-name",
-            state.name
-        );
-
-
-        /*
-         * Tim
-         */
-        setText(
-            "#heart-count",
-            state.hearts
-        );
-
-        setText(
-            ".heart-count",
-            state.hearts
-        );
-
-
-        /*
-         * Stats
-         */
-        setText(
-            "#happiness",
-            state.happiness
-        );
-
-        setText(
-            ".happiness",
-            state.happiness
-        );
-
-
-        setText(
-            "#hunger",
-            state.hunger
-        );
-
-        setText(
-            ".hunger",
-            state.hunger
-        );
-
-
-        setText(
-            "#cleanliness",
-            state.cleanliness
-        );
-
-        setText(
-            ".cleanliness",
-            state.cleanliness
-        );
-
-
-        /*
-         * Input tên
-         */
-        if (
-            nameInput &&
-            state.name !== "My little baby"
-        ) {
-
-            nameInput.value =
-                state.name;
-        }
-
-
-        /*
-         * Ảnh mèo
-         */
-        updateCatImage();
-
-
-        /*
-         * Mèo đã chọn
-         */
-        if (state.cat) {
-
-            catOptions.forEach(
-                function (option) {
-
-                    const id =
-                        getCatId(option);
-
-
-                    if (
-                        id ===
-                        state.cat.id
-                    ) {
-
-                        option.classList.add(
-                            "selected"
-                        );
-
-                    } else {
-
-                        option.classList.remove(
-                            "selected"
-                        );
-                    }
-                }
-            );
-        }
-    }
-
-
-    /* =====================================================
-       RESET PET
-    ===================================================== */
-
-    const resetButton =
-        $("#reset-pet") ||
-        $(".reset-pet");
-
-
-    if (resetButton) {
-
-        resetButton.addEventListener(
-            "click",
-            function () {
-
-                const confirmed =
-                    confirm(
-                        "Bạn có chắc muốn reset bé mèo không? 🐱"
-                    );
-
-
-                if (!confirmed) return;
-
-
-                localStorage.removeItem(
-                    STORAGE_KEY
-                );
-
-                localStorage.removeItem(
-                    "littleCatHouseOutfits"
-                );
-
-
-                state = {
-                    ...defaultState
-                };
-
-
-                selectedCat = null;
-
-
-                catOptions.forEach(
-                    function (item) {
-
-                        item.classList.remove(
-                            "selected"
-                        );
-                    }
-                );
-
-
-                outfitItems.forEach(
-                    function (item) {
-
-                        item.classList.remove(
-                            "owned"
-                        );
-                    }
-                );
-
-
-                updateUI();
-
-
-                showScreen(
-                    adoptScreen
-                );
-            }
-        );
-    }
-
-
-    /* =====================================================
-       PET STATUS — TỰ GIẢM NHẸ THEO THỜI GIAN
-    ===================================================== */
-
-    let lastUpdate =
-        Number(
-            localStorage.getItem(
-                "littleCatHouseLastUpdate"
-            )
-        );
-
-
-    if (
-        !Number.isFinite(lastUpdate) ||
-        lastUpdate <= 0
-    ) {
-
-        lastUpdate =
-            Date.now();
-    }
-
-
-    function updatePetOverTime() {
-
-        const now =
-            Date.now();
-
-
-        const elapsed =
-            now - lastUpdate;
-
-
-        /*
-         * Mỗi 5 phút giảm nhẹ một chút.
-         */
-        const fiveMinutes =
-            5 * 60 * 1000;
-
-
-        if (
-            elapsed >=
-            fiveMinutes
-        ) {
-
-            const steps =
-                Math.floor(
-                    elapsed /
-                    fiveMinutes
-                );
-
-
-            state.hunger =
-                Math.max(
-                    0,
-                    state.hunger -
-                    steps * 2
-                );
-
-
-            state.cleanliness =
-                Math.max(
-                    0,
-                    state.cleanliness -
-                    steps * 1
-                );
-
-
-            state.happiness =
-                Math.max(
-                    0,
-                    state.happiness -
-                    steps * 1
-                );
-
-
-            lastUpdate =
-                now;
-
-
-            localStorage.setItem(
-                "littleCatHouseLastUpdate",
-                String(now)
-            );
-
-
-            saveState();
-
-
+    function selectPlayer(id) {
+        setActiveId(id);
+        const player = currentPlayer();
+        if (!player) return;
+        if (player.game && player.game.adopted) {
+            showScreen(screens.home);
             updateUI();
+        } else {
+            showScreen(screens.adopt);
+            selectedCat = null;
+            $$(".cat-option").forEach(x => x.classList.remove("selected"));
+            const btn = $("#adopt-button");
+            if (btn) btn.disabled = true;
         }
     }
 
+    $("#new-player-button")?.addEventListener("click", () => {
+        const nameScreen = screens.playerName;
+        const input = $("#player-name-input");
+        if (input) input.value = "";
+        showScreen(nameScreen);
+        setTimeout(() => input?.focus(), 50);
+    });
 
-    setInterval(
-        updatePetOverTime,
-        30000
-    );
-
-
-    /* =====================================================
-       RESTORE SCREEN
-    ===================================================== */
-
-    restoreOwnedOutfits();
-
-
-    if (state.adopted) {
-
-        /*
-         * Đã nuôi mèo rồi
-         * → mở thẳng Home
-         */
-        showScreen(homeScreen);
-
-    } else {
-
-        /*
-         * Chưa nuôi
-         * → mở màn Adopt
-         */
-        showScreen(adoptScreen);
+    function createNewPlayer() {
+        const input = $("#player-name-input");
+        let name = input?.value.trim() || "";
+        if (!name) name = "Player " + nextPlayerNumber();
+        makePlayer(name);
+        showScreen(screens.adopt);
+        selectedCat = null;
     }
 
+    $("#player-name-confirm")?.addEventListener("click", createNewPlayer);
+    $("#player-name-input")?.addEventListener("keydown", e => {
+        if (e.key === "Enter") createNewPlayer();
+    });
 
-    updateUI();
+    /* CAT ADOPTION */
+    let selectedCat = null;
 
+    $$(".cat-option").forEach(option => {
+        option.addEventListener("click", () => {
+            $$(".cat-option").forEach(x => x.classList.remove("selected"));
+            option.classList.add("selected");
+            selectedCat = {
+                id: option.dataset.cat,
+                src: option.dataset.src || option.querySelector("img")?.getAttribute("src") || cats[option.dataset.cat]
+            };
+            const btn = $("#adopt-button");
+            if (btn) btn.disabled = false;
+        });
+    });
 
-    /* =====================================================
-       DEBUG — KHÔNG BẮT BUỘC
-    ===================================================== */
+    $("#adopt-button")?.addEventListener("click", () => {
+        if (!selectedCat) return alert("Hãy chọn một bé mèo trước nha 🐱");
+        const player = currentPlayer();
+        if (!player) return;
+        player.game = { ...defaultCat(), ...player.game, adopted: true, cat: selectedCat };
+        updateCurrentPlayer({ game: player.game });
+        const input = $("#cat-name-input");
+        if (input) input.value = "";
+        showScreen(screens.naming);
+    });
 
-    window.littleCatHouse = {
+    function saveCatName() {
+        const player = currentPlayer();
+        if (!player) return;
+        const input = $("#cat-name-input");
+        const name = input?.value.trim() || "My little baby";
+        player.game.name = name;
+        updateCurrentPlayer({ game: player.game });
+        showScreen(screens.home);
+        updateUI();
+    }
 
-        getState: function () {
-            return state;
-        },
+    $("#name-confirm")?.addEventListener("click", saveCatName);
+    $("#cat-name-input")?.addEventListener("keydown", e => {
+        if (e.key === "Enter") saveCatName();
+    });
 
-        addHearts: function (amount) {
-            addHearts(amount);
-        },
-
-        reset: function () {
-
-            localStorage.removeItem(
-                STORAGE_KEY
-            );
-
-            location.reload();
-        }
+    /* HOME / ACTIVITIES */
+    const actionText = {
+        kibble: "Yum yum! Bé ăn no rồi 🍖",
+        feed: "Yum yum! Bé ăn no rồi 🍖",
+        bath: "Sạch sẽ thơm tho 🛁",
+        soup: "Bát súp ấm áp ♡ 🍲",
+        play: "Chơi vui quá! 🎀",
+        pet: "Bé được nựng rồi ♡",
+        sleep: "Ngủ ngon nhé bé 🌙"
     };
 
+    function doAction(button) {
+        const player = currentPlayer();
+        if (!player || !player.game?.adopted) return;
+        const game = player.game;
+        const action = button.dataset.action;
+        const reward = Math.floor(Math.random() * 4) + 2;
+
+        if (action === "kibble" || action === "feed") game.hunger = Math.min(100, game.hunger + 25);
+        if (action === "bath") game.cleanliness = 100;
+        if (action === "soup") {
+            game.hunger = Math.min(100, game.hunger + 15);
+            game.happiness = Math.min(100, game.happiness + 15);
+        }
+        if (action === "play") game.happiness = Math.min(100, game.happiness + 25);
+        if (action === "pet") game.happiness = Math.min(100, game.happiness + 15);
+        if (action === "sleep") {
+            game.happiness = Math.min(100, game.happiness + 10);
+            game.hunger = Math.max(0, game.hunger - 5);
+        }
+
+        game.hearts += reward;
+        updateCurrentPlayer({ game });
+        updateUI();
+        showReward(reward);
+        const msg = $("#pet-message");
+        if (msg) msg.textContent = actionText[action] || "Bé vui lắm ♡";
+        button.classList.add("activity-done");
+        setTimeout(() => button.classList.remove("activity-done"), 400);
+    }
+
+    $$("[data-action]").forEach(button => {
+        button.addEventListener("click", () => doAction(button));
+    });
+
+    function showReward(amount) {
+        const box = $(".cat-game") || document.body;
+        const pop = document.createElement("div");
+        pop.className = "heart-reward-popup";
+        pop.textContent = "+" + amount + " ❤️";
+        box.appendChild(pop);
+        setTimeout(() => pop.classList.add("show"), 10);
+        setTimeout(() => pop.remove(), 1000);
+    }
+
+    /* CLOSET */
+    function renderCloset() {
+        const grid = $("#closet-grid");
+        const player = currentPlayer();
+        if (!grid || !player) return;
+        const game = player.game;
+        const owned = game.ownedOutfits || [];
+        grid.innerHTML = "";
+
+        outfits.forEach(item => {
+            const isOwned = owned.includes(item.id);
+            const isWearing = game.outfit?.id === item.id;
+            const card = document.createElement("div");
+            card.className = "outfit-item" + (isOwned ? " owned" : "") + (isWearing ? " selected" : "");
+            card.dataset.outfit = item.id;
+            card.dataset.price = item.price;
+            card.dataset.src = item.src;
+            card.innerHTML = `
+                <img src="${item.src}" alt="${item.name}">
+                <div>${item.name}</div>
+                <small>${isOwned ? (isWearing ? "WEARING ♡" : "OWNED ✓") : item.price + " ❤️"}</small>`;
+            card.addEventListener("click", () => buyOrWear(item));
+            grid.appendChild(card);
+        });
+    }
+
+    function buyOrWear(item) {
+        const player = currentPlayer();
+        if (!player) return;
+        const game = player.game;
+        game.ownedOutfits ||= [];
+
+        if (!game.ownedOutfits.includes(item.id)) {
+            if (game.hearts < item.price) {
+                alert("Chưa đủ tim đâu nè 💗\nCần " + item.price + " ❤️ để mua món này.");
+                return;
+            }
+            game.hearts -= item.price;
+            game.ownedOutfits.push(item.id);
+        }
+
+        game.outfit = { id: item.id, src: item.src };
+        updateCurrentPlayer({ game });
+        renderCloset();
+        updateUI();
+    }
+
+    $("#closet-open")?.addEventListener("click", () => {
+        renderCloset();
+        showScreen(screens.closet);
+        updateUI();
+    });
+
+    $("#closet-back")?.addEventListener("click", () => {
+        showScreen(screens.home);
+        updateUI();
+    });
+
+    /* PLAYER TOOLS */
+    $("#switch-player")?.addEventListener("click", () => {
+        renderPlayers();
+        showScreen(screens.player);
+    });
+
+    $("#rename-player")?.addEventListener("click", () => {
+        const player = currentPlayer();
+        if (!player) return;
+        const newName = prompt("Đổi tên player:", player.name);
+        if (newName && newName.trim()) {
+            updateCurrentPlayer({ name: newName.trim() });
+            updateUI();
+        }
+    });
+
+    $("#reset-pet")?.addEventListener("click", () => {
+        const player = currentPlayer();
+        if (!player) return;
+        if (!confirm("Reset player hiện tại? Dữ liệu player khác sẽ không bị xoá.")) return;
+        player.game = defaultCat();
+        updateCurrentPlayer({ game: player.game });
+        showScreen(screens.adopt);
+        selectedCat = null;
+        $$(".cat-option").forEach(x => x.classList.remove("selected"));
+        const btn = $("#adopt-button");
+        if (btn) btn.disabled = true;
+    });
+
+    /* UI */
+    function updateUI() {
+        const player = currentPlayer();
+        if (!player) return;
+        const game = player.game || defaultCat();
+        const cat = game.cat || {};
+
+        $("#pet-title") && ($("#pet-title").textContent = game.name || "My little baby");
+        $("#heart-count") && ($("#heart-count").textContent = game.hearts || 0);
+        $("#closet-heart-count") && ($("#closet-heart-count").textContent = game.hearts || 0);
+
+        const sprite = $("#pet-sprite");
+        if (sprite) {
+            sprite.style.backgroundImage = cat.src ? `url("${cat.src}")` : "none";
+            sprite.style.backgroundSize = "contain";
+            sprite.style.backgroundPosition = "center";
+            sprite.style.backgroundRepeat = "no-repeat";
+        }
+
+        const status = $("#pet-status");
+        if (status) {
+            const avg = ((game.happiness || 0) + (game.hunger || 0) + (game.cleanliness || 0)) / 3;
+            status.textContent = avg >= 80 ? "😺 HAPPY" : avg >= 50 ? "😿 OKAY" : "😾 NEED CARE";
+        }
+
+        $$(".outfit-item").forEach(item => {
+            const id = item.dataset.outfit;
+            item.classList.toggle("owned", (game.ownedOutfits || []).includes(id));
+            item.classList.toggle("selected", game.outfit?.id === id);
+        });
+    }
+
+    function escapeHTML(text) {
+        return String(text).replace(/[&<>'"]/g, c => ({
+            "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+        }[c]));
+    }
+
+    /* START */
+    const players = getPlayers();
+    const id = activeId();
+
+    if (!players.length) {
+        showScreen(screens.player);
+        renderPlayers();
+    } else if (id && currentPlayer()) {
+        const player = currentPlayer();
+        if (player.game?.adopted) {
+            showScreen(screens.home);
+            updateUI();
+        } else {
+            showScreen(screens.adopt);
+        }
+    } else {
+        showScreen(screens.player);
+        renderPlayers();
+    }
+
+    /* Debug helper */
+    window.littleCatHouse = {
+        getPlayers,
+        currentPlayer,
+        addHearts(amount) {
+            const p = currentPlayer();
+            if (!p) return;
+            p.game.hearts = Math.max(0, (p.game.hearts || 0) + Number(amount || 0));
+            updateCurrentPlayer({ game: p.game });
+            updateUI();
+        },
+        resetCurrentPlayer() {
+            const p = currentPlayer();
+            if (!p) return;
+            p.game = defaultCat();
+            updateCurrentPlayer({ game: p.game });
+            showScreen(screens.adopt);
+        }
+    };
 });
