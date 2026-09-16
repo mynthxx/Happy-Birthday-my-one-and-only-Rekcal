@@ -608,6 +608,51 @@
 
         <div id="cat-game" class="cat-game">
 
+            <!-- PLAYER STORAGE -->
+<section id="player-screen" class="cat-screen">
+  <div class="player-storage">
+    <div class="cat-pixel-label">✦ LITTLE CAT HOUSE ✦</div>
+
+    <h1>Who are you? ♡</h1>
+
+    <p>Chọn người chơi để tiếp tục.</p>
+
+    <div id="player-list" class="player-list"></div>
+
+    <button id="new-player-button" class="pixel-btn">
+      + NEW PLAYER
+    </button>
+  </div>
+</section>
+
+<!-- PLAYER NAME -->
+<section id="player-name-screen" class="cat-screen hidden">
+  <div class="name-layout">
+    <div class="name-preview">
+      🐾
+    </div>
+
+    <div class="name-card">
+      <div class="cat-pixel-label">✦ LITTLE CAT HOUSE ✦</div>
+
+      <h1>Đặt tên Player ♡</h1>
+
+      <p>Tên này dùng để lưu riêng game của bạn.</p>
+
+      <input
+        id="player-name-input"
+        type="text"
+        maxlength="16"
+        placeholder="Ví dụ: Rekcal..."
+        autocomplete="off"
+      >
+
+      <button id="player-name-confirm" class="pixel-btn">
+        NEXT → CHOOSE CAT
+      </button>
+    </div>
+  </div>
+</section>
 
             <!-- =================================================
                  1. ADOPT SCREEN
@@ -950,21 +995,25 @@
                 <!-- BOTTOM BUTTONS -->
                 <div class="game-bottom">
 
-                    <button
-                        id="closet-open"
-                        class="shop-btn"
-                    >
-                        🛍 CAT CLOSET
-                    </button>
+  <div class="player-tools">
+    <button id="switch-player" class="text-btn">
+      ♡ PLAYERS
+    </button>
 
-                    <button
-                        id="reset-pet"
-                        class="text-btn"
-                    >
-                        Reset pet
-                    </button>
+    <button id="rename-player" class="text-btn">
+      ✏️ RENAME
+    </button>
+  </div>
 
-                </div>
+  <button id="closet-open" class="shop-btn">
+    🛍 CAT CLOSET
+  </button>
+
+  <button id="reset-pet" class="text-btn">
+    Reset current player
+  </button>
+
+</div>
 
             </section>
 
