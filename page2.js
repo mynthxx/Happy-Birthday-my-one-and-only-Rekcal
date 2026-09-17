@@ -1731,7 +1731,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Bé được nựng rồi ♡",
 
         sleep:
-            "Ngủ ngon nhé bé 🌙"
+            "Bé ơi! Ngủ ngon, đêm đã khuya rồi 🌙"
 
     };
 
