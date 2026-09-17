@@ -1805,21 +1805,22 @@ body {
 }
 
 /* =========================
-   LITTLE MESSAGE — 25 CARDS
+   LITTLE MESSAGE — 22 CARDS
 ========================= */
 
 .message-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  gap: 12px 10px;
   margin-top: 24px;
-  max-width: 720px;
+  max-width: 760px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .message-card {
   position: relative;
+  width: 100%;
   aspect-ratio: 3 / 4;
   border: 0;
   padding: 0;
@@ -1837,56 +1838,72 @@ body {
   transform-style: preserve-3d;
 }
 
+/* Khi bấm: lật từ mặt sau → mặt Tarot */
 .message-card.is-flipped .message-card-inner {
   transform: rotateY(180deg);
 }
 
-.message-card-face {
+.message-card-front,
+.message-card-back {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 
-  border: 2px solid #765458;
-  box-shadow: 4px 4px 0 rgba(83,65,63,.14);
+  border: 1.5px solid #765458;
+  box-shadow: 2px 2px 0 rgba(83,65,63,.14);
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.message-card-back {
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.35) 25%, transparent 25%) 0 0 / 12px 12px,
-    #e7d6c7;
-}
-
-.message-card-back::before {
-  content: "♡";
-  font-size: 34px;
-  color: #9b7078;
-  text-shadow: 2px 2px 0 rgba(255,255,255,.5);
-}
+/* =========================
+   MẶT SAU — HIỆN BAN ĐẦU
+========================= */
 
 .message-card-front {
-  transform: rotateY(180deg);
-  background: #fff8eb;
+  background: #e7d6c7;
+  transform: rotateY(0deg);
 }
 
 .message-card-front img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   image-rendering: pixelated;
 }
 
-.message-card:hover:not(.is-flipped) .message-card-inner {
-  transform: translateY(-4px) rotateY(0deg);
+/* =========================
+   MẶT TAROT — ẨN BAN ĐẦU
+========================= */
+
+.message-card-back {
+  background: #fff8eb;
+  transform: rotateY(180deg);
+}
+
+.message-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Hover nhẹ */
+.message-card:hover:not(.is-flipped) {
+  transform: translateY(-3px);
+}
+
+/* Không cho click lại khi đang lật */
+.message-card.is-flipped {
+  cursor: default;
 }
 
 .message-card:focus {
@@ -1895,7 +1912,7 @@ body {
 
 .message-card:focus-visible {
   outline: 2px dashed #d96f83;
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 /* Không cho click lại sau khi đã lật */
