@@ -1804,43 +1804,194 @@ body {
   border: 0; background: transparent; color: #9a777d; font: 10px inherit; cursor: pointer;
 }
 
-.closet-grid {
+/* =========================
+   LITTLE MESSAGE — 25 CARDS
+========================= */
+
+.message-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.outfit-card {
-  background: rgba(255,250,235,.86);
-  border: 2px solid rgba(94,76,72,.14);
-  border-radius: 12px;
-  padding: 8px;
-  text-align: center;
-  box-shadow: 3px 3px 0 rgba(83,65,63,.08);
-}
-.outfit-card img {
-  width: 100%;
-  height: 105px;
-  object-fit: cover;
-  object-position: center;
-  image-rendering: pixelated;
-  border-radius: 8px;
-  background: #e2edc9;
-}
-.outfit-card h3 { margin: 7px 0 2px; font-size: 11px; }
-.outfit-card p { margin: 0 0 7px; font-size: 10px; color: #d46e7f; font-weight: 700; }
-.outfit-card button {
-  width: 100%;
-  border: 1px solid #b99591;
-  background: #fff4eb;
-  border-radius: 7px;
-  padding: 7px;
-  font: 700 10px "Courier New", monospace;
+
+.message-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 0;
+  padding: 0;
+  background: transparent;
   cursor: pointer;
-  color: #5b4245;
+  perspective: 900px;
+  font-family: inherit;
 }
-.outfit-card button.owned { background: #e9f1d9; }
-.outfit-card button.wearing { background: #f8ced5; }
+
+.message-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(.2,.75,.25,1);
+  transform-style: preserve-3d;
+}
+
+.message-card.is-flipped .message-card-inner {
+  transform: rotateY(180deg);
+}
+
+.message-card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  border: 2px solid #765458;
+  box-shadow: 4px 4px 0 rgba(83,65,63,.14);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-card-back {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.35) 25%, transparent 25%) 0 0 / 12px 12px,
+    #e7d6c7;
+}
+
+.message-card-back::before {
+  content: "♡";
+  font-size: 34px;
+  color: #9b7078;
+  text-shadow: 2px 2px 0 rgba(255,255,255,.5);
+}
+
+.message-card-front {
+  transform: rotateY(180deg);
+  background: #fff8eb;
+}
+
+.message-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.message-card:hover:not(.is-flipped) .message-card-inner {
+  transform: translateY(-4px) rotateY(0deg);
+}
+
+.message-card:focus {
+  outline: none;
+}
+
+.message-card:focus-visible {
+  outline: 2px dashed #d96f83;
+  outline-offset: 4px;
+}
+
+/* Không cho click lại sau khi đã lật */
+.message-card.is-flipped {
+  cursor: default;
+}
+
+/* =========================
+   MESSAGE NOTE
+========================= */
+
+.message-note {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+
+  width: min(380px, calc(100% - 40px));
+  padding: 22px 24px;
+
+  background: #fff8eb;
+  border: 3px solid #765458;
+  border-radius: 15px;
+
+  box-shadow: 7px 7px 0 rgba(68,48,50,.2);
+
+  text-align: center;
+  font-family: "Courier New", monospace;
+
+  animation: notePop .25s ease;
+}
+
+.message-note::before {
+  content: "♡ LITTLE NOTE ♡";
+  display: block;
+  margin-bottom: 10px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #a06d77;
+}
+
+.message-note-text {
+  margin: 0;
+  color: #594246;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@keyframes notePop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -47%) scale(.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Lớp nền nhẹ phía sau note */
+.message-note-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 29;
+  background: rgba(50,38,38,.18);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+  .message-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .message-card-face {
+    border-radius: 9px;
+  }
+
+  .message-card-back::before {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 420px) {
+  .message-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+  }
+}
 
 .mini-modal {
   position: fixed;
