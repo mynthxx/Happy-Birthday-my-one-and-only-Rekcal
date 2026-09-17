@@ -894,7 +894,7 @@ setInterval(
 
 /* =====================================================
    LITTLE CAT HOUSE — JS
-   Player Storage + Cat House + 25 Message Cards
+   Player Storage + Cat House + 22 Message Cards
    ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -932,7 +932,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       25 MESSAGE CARDS
+       22 MESSAGE CARDS
        
        Sau này mình sẽ chỉnh lại tên file ảnh
        cho đúng với HTML / folder của bạn.
@@ -944,7 +944,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 1,
             src: "tarot-01.png",
             name: "THE LOVERS",
-            note: "Có những ngày bạn không cần phải làm điều gì thật đặc biệt. Chỉ cần là chính mình thôi, vì bạn đã đủ tuyệt vời rồi. ♡"
+            note: "Sự lựa chọn và sự kết nối. Không chỉ nói về tình yêu. Đây còn là việc lựa chọn điều phù hợp với giá trị thật của mình và chịu trách nhiệm với lựa chọn đó. ♡"
         },
 
         {
@@ -958,7 +958,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 3,
             src: "tarot-03.png",
             name: "JUSTICE",
-            note: "Đừng quá khắt khe với bản thân. Bạn cũng xứng đáng nhận được sự dịu dàng mà bạn vẫn dành cho người khác. ♡"
+            note: "Đừng quá khắt khe với bản thân. Hãy nhìn sự việc một cách khách quan, chấp nhận hậu quả của lựa chọn và tìm kiếm sự cân bằng thay vì chỉ nhìn theo cảm xúc. ⚖️"
         },
 
         {
@@ -972,7 +972,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 5,
             src: "tarot-05.png",
             name: "THE SUN",
-            note: "Mong hôm nay có thật nhiều điều nhỏ xíu làm bạn mỉm cười. Bạn là một phần rất ấm áp trong thế giới này. ☀️"
+            note: "Hôm nay sẽ có thật nhiều điều nhỏ xíu làm bạn mỉm cười. Đây là lá bài của năng lượng tích cực, sự tự tin, thành thật và khả năng nhìn mọi thứ rõ ràng hơn. ☀️"
         },
 
         {
@@ -986,7 +986,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 7,
             src: "tarot-07.png",
             name: "THE HERMIT",
-            note: "Nếu cần nghỉ một chút thì cứ nghỉ. Không phải lúc nào bạn cũng phải mạnh mẽ hay vui vẻ. Mình vẫn ở đây. 🫶"
+            note: "Thu mình để tìm câu trả lời. Có những giai đoạn cần tạm rời khỏi tiếng ồn bên ngoài để hiểu chính mình. Cô độc và cô đơn không hoàn toàn giống nhau. 🕯️"
         },
 
         {
@@ -1014,7 +1014,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 11,
             src: "tarot-11.png",
             name: "DEATH",
-            note: "Có những điều cũ cần được khép lại để nhường chỗ cho điều mới. Mong chương tiếp theo của bạn thật dịu dàng. 🌸"
+            note: "Có những điều cũ cần được khép lại để nhường chỗ cho điều mới. Buông thả một chút có thể giúp bạn nhìn thấy điều trước đây không thấy. 🌸"
         },
 
         {
@@ -1028,7 +1028,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 13,
             src: "tarot-13.png",
             name: "THE DEVIL",
-            note: "Đừng để những suy nghĩ tiêu cực giữ chân bạn. Bạn không phải những điều khiến bạn nghi ngờ chính mình. ❤️"
+            note: "Đừng để những suy nghĩ tiêu cực giữ chân bạn. Đối diện với sự ràng buộc. Ham muốn, nghiện ngập, sợ hãi, kiểm soát, phụ thuộc hoặc những thứ khiến bạn cảm thấy không thể thoát ra. ⛓️"
         },
 
         {
@@ -1042,21 +1042,21 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 15,
             src: "tarot-15.png",
             name: "THE STAR",
-            note: "Hãy giữ lại một chút hy vọng cho những ngày phía trước. Có rất nhiều điều đẹp đẽ mà bạn chưa gặp đâu. ⭐"
+            note: "Niềm tin, sự hồi phục, cảm hứng và cảm giác mình đang dần trở lại với chính mình. ⭐"
         },
 
         {
             id: 16,
             src: "tarot-16.png",
             name: "THE EMPRESS",
-            note: "Bạn xứng đáng được yêu thương, được chăm sóc và được nuông chiều một chút. Hôm nay nhớ thương mình nhé. 🌷"
+            note: "Tình yêu, sự sáng tạo, sự sung túc và khả năng chăm sóc bản thân/người khác. Điều gì được chăm đúng cách sẽ có khả năng nở rộ. 🌷"
         },
 
         {
             id: 17,
             src: "tarot-17.png",
             name: "THE EMPEROR",
-            note: "Bạn có thể mạnh mẽ mà không cần phải gồng mình. Cho phép bản thân được dựa vào ai đó khi cần nhé. ♡"
+            note: "Bạn có thể mạnh mẽ mà không cần phải gồng mình. Cho phép bản thân được dựa vào ai đó khi cần nhé. 👑"
         },
 
         {
@@ -1070,49 +1070,28 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 19,
             src: "tarot-19.png",
             name: "THE FOOL",
-            note: "Có thể hôm nay là một ngày thích hợp để thử một điều mới. Không cần hoàn hảo, chỉ cần vui một chút thôi. 🎀"
+            note: "Có thể hôm nay là một ngày thích hợp để thử một điều mới. Không cần hoàn hảo, tin vào trải nghiệm, nhưng đừng để sự hồn nhiên biến thành liều lĩnh. 🌱"
         },
 
         {
             id: 20,
             src: "tarot-20.png",
             name: "THE MAGICIAN",
-            note: "Bạn có nhiều khả năng hơn bạn nghĩ. Tin vào bản thân thêm một chút nhé — bạn làm được nhiều điều lắm. ✨"
+            note: "Bạn có nhiều khả năng hơn bạn nghĩ. Tin vào bản thân thêm một chút nhé! Bạn làm được nhiều điều lắm. ✨"
         },
 
         {
             id: 21,
             src: "tarot-21.png",
             name: "THE HIGH PRIESTESS",
-            note: "Hãy lắng nghe cảm giác của mình. Đôi khi trái tim đã biết câu trả lời trước cả khi chúng ta kịp gọi tên nó. 🌙"
+            note: "Hãy lắng nghe trực giác của mình. Đôi khi trái tim đã biết câu trả lời trước cả khi chúng ta kịp gọi tên nó. 🌙"
         },
 
         {
             id: 22,
             src: "tarot-22.png",
             name: "THE WORLD",
-            note: "Bạn đã đi xa hơn bạn tưởng. Nhìn lại một chút đi — có rất nhiều điều đáng để bạn tự hào về mình. 🌎"
-        },
-
-        {
-            id: 23,
-            src: "tarot-23.png",
-            name: "A LITTLE WISH",
-            note: "Ước một điều nho nhỏ đi. Biết đâu vũ trụ hôm nay đang rất rảnh để chiều bạn đó. ♡✨"
-        },
-
-        {
-            id: 24,
-            src: "tarot-24.png",
-            name: "A LITTLE LOVE",
-            note: "Có một người luôn mong bạn có một ngày thật vui, ăn uống đầy đủ và ngủ thật ngon. Người đó thương bạn nhiều lắm. ❤️"
-        },
-
-        {
-            id: 25,
-            src: "tarot-25.png",
-            name: "YOUR SPECIAL MESSAGE",
-            note: "Nếu bạn đang đọc được lá bài này, thì đây là lời nhắc nhỏ: bạn rất đặc biệt, và bạn được yêu nhiều hơn bạn nghĩ. 🐾"
+            note: "Bạn đã đi xa hơn bạn tưởng. Nhìn lại một chút đi.. có rất nhiều điều đáng để bạn tự hào về bản thân mình. 🌎"
         }
 
     ];
