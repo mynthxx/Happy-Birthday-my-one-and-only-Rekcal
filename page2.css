@@ -1810,10 +1810,10 @@ body {
 
 .message-grid {
   display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
-  gap: 12px 10px;
-  margin-top: 24px;
-  max-width: 760px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -2163,29 +2163,4 @@ body {
   .player-list {
     grid-template-columns: 1fr;
   }
-}
-
-/* TAROT — 22 LÁ VỪA KHUNG SAFARI */
-.message-grid {
-    display: grid !important;
-    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-    gap: 12px !important;
-    width: 92% !important;
-    max-width: 760px !important;
-    margin: 20px auto !important;
-}
-
-.message-card {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 3 / 4 !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-}
-
-.message-card-inner,
-.message-card-front,
-.message-card-back {
-    width: 100% !important;
-    height: 100% !important;
 }
