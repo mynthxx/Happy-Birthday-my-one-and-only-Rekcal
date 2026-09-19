@@ -2164,3 +2164,28 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* TAROT — 22 LÁ VỪA KHUNG SAFARI */
+.message-grid {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 92% !important;
+    max-width: 760px !important;
+    margin: 20px auto !important;
+}
+
+.message-card {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 4 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+}
+
+.message-card-inner,
+.message-card-front,
+.message-card-back {
+    width: 100% !important;
+    height: 100% !important;
+}
