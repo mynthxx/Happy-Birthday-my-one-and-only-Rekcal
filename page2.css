@@ -2231,12 +2231,11 @@ body {
 }
 
 /* =====================================================
-   LETTER APP
+   LETTER APP — CLEAN VERSION
 ===================================================== */
 
 .letter-content {
     position: relative !important;
-
     width: 100% !important;
     height: calc(100% - 48px) !important;
 
@@ -2248,7 +2247,9 @@ body {
 }
 
 
-/* BOOK */
+/* =========================
+   BOOK
+========================= */
 
 .letter-book {
     position: relative !important;
@@ -2262,7 +2263,9 @@ body {
 }
 
 
-/* PAGE */
+/* =========================
+   PAGE
+========================= */
 
 .letter-page {
     position: absolute !important;
@@ -2284,12 +2287,12 @@ body {
 
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
 
-/* IMAGE */
+/* =========================
+   IMAGE
+========================= */
 
 .letter-page img {
     display: block !important;
@@ -2304,7 +2307,9 @@ body {
 }
 
 
-/* PAGE 1 */
+/* =========================
+   PAGE 1
+========================= */
 
 .letter-page-1 {
     z-index: 2;
@@ -2313,7 +2318,9 @@ body {
 }
 
 
-/* PAGE 2 */
+/* =========================
+   PAGE 2
+========================= */
 
 .letter-page-2 {
     z-index: 1;
@@ -2322,7 +2329,9 @@ body {
 }
 
 
-/* FLIP */
+/* =========================
+   FLIP
+========================= */
 
 .letter-book.show-page-2 .letter-page-1 {
     transform: rotateY(-180deg);
@@ -2335,15 +2344,15 @@ body {
 }
 
 
-/* =====================================================
+/* =========================
    ARROWS
-===================================================== */
+========================= */
 
 .letter-prev,
 .letter-next {
     position: absolute !important;
 
-    top: 50px;
+    top: 50% !important;
 
     width: 44px !important;
     height: 44px !important;
@@ -2356,10 +2365,12 @@ body {
     align-items: center !important;
     justify-content: center !important;
 
+    transform: translateY(-50%) !important;
+
     border: none !important;
     border-radius: 50% !important;
 
-    background: rgba(255,255,255,0.95) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
 
     color: #7b3b3b !important;
 
@@ -2370,49 +2381,56 @@ body {
 
     z-index: 9999 !important;
 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 
-/* LEFT */
+/* TRÁI */
 
 .letter-prev {
-    left: 15px;
+    left: 15px !important;
 }
 
 
-/* RIGHT */
+/* PHẢI */
 
 .letter-next {
-    right: 15px;
+    right: 15px !important;
 }
 
 
-/* HOVER */
+/* =========================
+   CHỈ HIỆN ĐÚNG NÚT
+========================= */
+
+.letter-prev {
+    display: none !important;
+}
+
+.letter-book.show-page-2 ~ .letter-prev {
+    display: flex !important;
+}
+
+.letter-book:not(.show-page-2) ~ .letter-next {
+    display: flex !important;
+}
+
+
+/* =========================
+   HOVER
+========================= */
 
 .letter-prev:hover,
 .letter-next:hover {
-    transform: scale(1.08);
+    transform:
+        translateY(-50%)
+        scale(1.08) !important;
 }
 
 
-/* PAGE 1 chỉ có NEXT */
-
-.letter-page-1 .letter-prev {
-    display: none !important;
-}
-
-
-/* PAGE 2 chỉ có PREV */
-
-.letter-page-2 .letter-next {
-    display: none !important;
-}
-
-
-/* SCROLLBAR */
+/* =========================
+   SCROLLBAR
+========================= */
 
 .letter-page::-webkit-scrollbar {
     width: 8px;
@@ -2423,7 +2441,7 @@ body {
 }
 
 .letter-page::-webkit-scrollbar-thumb {
-    background: rgba(0,0,0,0.18);
+    background: rgba(0, 0, 0, 0.18);
 
     border-radius: 10px;
 }
