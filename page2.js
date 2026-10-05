@@ -2627,21 +2627,144 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =====================================================
-   LETTER — PAGE FLIP
+   LETTER — PAGE FLIP + FOLLOW SCROLL
 ===================================================== */
 
+const letterContent = document.querySelector(".letter-content");
 const letterBook = document.querySelector(".letter-book");
+
+const letterPage1 = document.querySelector(".letter-page-1");
+const letterPage2 = document.querySelector(".letter-page-2");
+
 const letterPrev = document.querySelector(".letter-prev");
 const letterNext = document.querySelector(".letter-next");
 
-if (letterBook && letterPrev && letterNext) {
 
-    letterNext.addEventListener("click", function () {
-        letterBook.classList.add("show-page-2");
-    });
+if (
+    letterContent &&
+    letterBook &&
+    letterPage1 &&
+    letterPage2 &&
+    letterPrev &&
+    letterNext
+) {
 
-    letterPrev.addEventListener("click", function () {
-        letterBook.classList.remove("show-page-2");
-    });
+    /* =========================
+       ĐẶT VỊ TRÍ NÚT
+    ========================= */
+
+    function updateLetterArrow() {
+
+        let activePage;
+
+        if (letterBook.classList.contains("show-page-2")) {
+            activePage = letterPage2;
+        } else {
+            activePage = letterPage1;
+        }
+
+
+        const scrollTop = activePage.scrollTop;
+
+        const visibleHeight = activePage.clientHeight;
+
+
+        const arrowTop =
+            scrollTop +
+            (visibleHeight / 2) -
+            22;
+
+
+        if (letterBook.classList.contains("show-page-2")) {
+
+            letterPrev.style.top =
+                arrowTop + "px";
+
+        } else {
+
+            letterNext.style.top =
+                arrowTop + "px";
+
+        }
+
+    }
+
+
+    /* =========================
+       KÉO TRANG → NÚT ĐI THEO
+    ========================= */
+
+    letterPage1.addEventListener(
+        "scroll",
+        updateLetterArrow
+    );
+
+    letterPage2.addEventListener(
+        "scroll",
+        updateLetterArrow
+    );
+
+
+    /* =========================
+       NEXT
+    ========================= */
+
+    letterNext.addEventListener(
+        "click",
+        function () {
+
+            letterBook.classList.add(
+                "show-page-2"
+            );
+
+            letterPage2.scrollTop = 0;
+
+            setTimeout(
+                updateLetterArrow,
+                50
+            );
+
+        }
+    );
+
+
+    /* =========================
+       PREVIOUS
+    ========================= */
+
+    letterPrev.addEventListener(
+        "click",
+        function () {
+
+            letterBook.classList.remove(
+                "show-page-2"
+            );
+
+            letterPage1.scrollTop = 0;
+
+            setTimeout(
+                updateLetterArrow,
+                50
+            );
+
+        }
+    );
+
+
+    /* =========================
+       RESIZE
+    ========================= */
+
+    window.addEventListener(
+        "resize",
+        updateLetterArrow
+    );
+
+
+    /* =========================
+       VỊ TRÍ BAN ĐẦU
+    ========================= */
+
+    updateLetterArrow();
 
 }
