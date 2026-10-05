@@ -2625,3 +2625,23 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 });
+
+/* =====================================================
+   LETTER — PAGE FLIP
+===================================================== */
+
+const letterBook = document.querySelector(".letter-book");
+const letterPrev = document.querySelector(".letter-prev");
+const letterNext = document.querySelector(".letter-next");
+
+if (letterBook && letterPrev && letterNext) {
+
+    letterNext.addEventListener("click", function () {
+        letterBook.classList.add("show-page-2");
+    });
+
+    letterPrev.addEventListener("click", function () {
+        letterBook.classList.remove("show-page-2");
+    });
+
+}
