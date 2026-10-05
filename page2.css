@@ -2231,179 +2231,30 @@ body {
 }
 
 /* =====================================================
-   LETTER APP — FULL PAGE + SCROLL + PAGE FLIP
+   LETTER APP — FULL IMAGE + SCROLL + FOLLOW ARROWS
 ===================================================== */
 
 .letter-content {
+    position: relative !important;
+
+    width: 100% !important;
+    height: calc(100% - 48px) !important;
+
     padding: 0 !important;
+
     overflow: hidden !important;
+
     background: #f7f2ee;
 }
 
-.letter-book {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    perspective: 1800px;
-}
-
-/* =========================
-   LETTER PAGES
-========================= */
-
-.letter-page {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    background: #ffffff;
-
-    transform-style: preserve-3d;
-    transform-origin: left center;
-
-    transition: transform 0.8s ease;
-
-    backface-visibility: hidden;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-.letter-page img {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: none;
-
-    margin: 0;
-    padding: 0;
-
-    object-fit: initial;
-
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-/* =========================
-   TRANG 1
-========================= */
-
-.letter-page-1 {
-    z-index: 2;
-    transform: rotateY(0deg);
-}
-
-/* =========================
-   TRANG 2
-========================= */
-
-.letter-page-2 {
-    z-index: 1;
-    transform: rotateY(180deg);
-}
-
-/* =========================
-   LẬT SANG TRANG 2
-========================= */
-
-.letter-book.show-page-2 .letter-page-1 {
-    transform: rotateY(-180deg);
-}
-
-.letter-book.show-page-2 .letter-page-2 {
-    z-index: 3;
-    transform: rotateY(0deg);
-}
-
-/* =========================
-   NÚT LẬT TRANG
-========================= */
-
-.letter-prev,
-.letter-next {
-    position: absolute;
-
-    top: 50%;
-
-    width: 44px;
-    height: 44px;
-
-    transform: translateY(-50%);
-
-    border: none;
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.92);
-
-    color: #7b3b3b;
-
-    font-size: 32px;
-    line-height: 1;
-
-    cursor: pointer;
-
-    z-index: 20;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-}
-
-.letter-prev:hover,
-.letter-next:hover {
-    background: #ffffff;
-    transform: translateY(-50%) scale(1.08);
-}
-
-.letter-prev {
-    left: 15px;
-}
-
-.letter-next {
-    right: 15px;
-}
-
-/* =========================
-   ẨN NÚT KHÔNG CẦN THIẾT
-========================= */
-
-.letter-book:not(.show-page-2) .letter-prev {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.letter-book.show-page-2 .letter-next {
-    opacity: 0;
-    pointer-events: none;
-}
 
 /* =====================================================
-   LETTER — FIXED ARROWS + SCROLLABLE PAGES
-   OVERRIDE
+   BOOK
 ===================================================== */
 
-.letter-content {
-    padding: 0 !important;
-    overflow: hidden !important;
-}
-
-/* Khung Letter không được scroll */
 .letter-book {
     position: relative !important;
+
     width: 100% !important;
     height: 100% !important;
 
@@ -2412,7 +2263,11 @@ body {
     perspective: 1800px;
 }
 
-/* Mỗi mặt thư tự scroll */
+
+/* =====================================================
+   TỪNG TRANG
+===================================================== */
+
 .letter-page {
     position: absolute !important;
 
@@ -2426,9 +2281,26 @@ body {
     overflow-x: hidden !important;
 
     background: #ffffff;
+
+    transform-style: preserve-3d;
+
+    transform-origin: left center;
+
+    transition:
+        transform 0.8s ease;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
-/* Ảnh full chiều ngang */
+
+/* =====================================================
+   ẢNH — FULL CHIỀU NGANG
+===================================================== */
+
 .letter-page img {
     display: block !important;
 
@@ -2439,18 +2311,66 @@ body {
 
     margin: 0 !important;
     padding: 0 !important;
+
+    object-fit: initial !important;
+
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
+
 /* =====================================================
-   ARROWS — LUÔN NẰM GIỮA CỬA SỔ
+   TRANG 1
+===================================================== */
+
+.letter-page-1 {
+    z-index: 2;
+
+    transform: rotateY(0deg);
+}
+
+
+/* =====================================================
+   TRANG 2
+===================================================== */
+
+.letter-page-2 {
+    z-index: 1;
+
+    transform: rotateY(180deg);
+}
+
+
+/* =====================================================
+   HIỆU ỨNG LẬT
+===================================================== */
+
+.letter-book.show-page-2 .letter-page-1 {
+    transform: rotateY(-180deg);
+}
+
+.letter-book.show-page-2 .letter-page-2 {
+    z-index: 3;
+
+    transform: rotateY(0deg);
+}
+
+
+/* =====================================================
+   NÚT LẬT TRANG
+   NẰM TRONG TỪNG TRANG
 ===================================================== */
 
 .letter-prev,
 .letter-next {
-    position: absolute !important;
+    position: sticky !important;
 
     top: 50% !important;
-    transform: translateY(-50%) !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
 
     width: 44px !important;
     height: 44px !important;
@@ -2458,47 +2378,114 @@ body {
     margin: 0 !important;
     padding: 0 !important;
 
+    transform: translateY(-50%) !important;
+
     border: none !important;
+
     border-radius: 50% !important;
 
-    background: rgba(255, 255, 255, 0.95) !important;
+    background:
+        rgba(255, 255, 255, 0.95) !important;
 
     color: #7b3b3b !important;
 
     font-size: 32px !important;
-    line-height: 44px !important;
-    text-align: center !important;
+
+    line-height: 1 !important;
 
     cursor: pointer !important;
 
     z-index: 9999 !important;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18) !important;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.18);
 
-    transition: transform 0.2s ease !important;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
-.letter-prev {
-    left: 15px !important;
-}
+
+/* =====================================================
+   NÚT NEXT — BÊN PHẢI
+===================================================== */
 
 .letter-next {
-    right: 15px !important;
+    position: sticky !important;
+
+    float: right;
+
+    right: 15px;
+
+    margin-right: 15px !important;
+
+    margin-top: -50% !important;
 }
+
+
+/* =====================================================
+   NÚT PREVIOUS — BÊN TRÁI
+===================================================== */
+
+.letter-prev {
+    position: sticky !important;
+
+    float: left;
+
+    left: 15px;
+
+    margin-left: 15px !important;
+
+    margin-top: -50% !important;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
 
 .letter-prev:hover,
 .letter-next:hover {
-    transform: translateY(-50%) scale(1.08) !important;
+    transform:
+        translateY(-50%)
+        scale(1.08) !important;
+
+    background:
+        #ffffff !important;
 }
 
-/* Trang 1: chỉ hiện nút sang phải */
-.letter-book:not(.show-page-2) .letter-prev {
-    opacity: 0 !important;
-    pointer-events: none !important;
+
+/* =====================================================
+   ẨN NÚT KHÔNG CẦN THIẾT
+===================================================== */
+
+.letter-page-1 .letter-prev {
+    display: none !important;
 }
 
-/* Trang 2: chỉ hiện nút quay lại */
-.letter-book.show-page-2 .letter-next {
-    opacity: 0 !important;
-    pointer-events: none !important;
+.letter-page-2 .letter-next {
+    display: none !important;
+}
+
+
+/* =====================================================
+   SCROLLBAR CỦA LETTER
+===================================================== */
+
+.letter-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+.letter-page::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.letter-page::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+
+    border-radius: 10px;
+}
+
+.letter-page::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.30);
 }
