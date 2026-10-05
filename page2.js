@@ -2654,12 +2654,17 @@ if (
         const arrow =
     page2Open ? letterPrev : letterNext;
 
-letterPrev.style.display =
-    page2Open ? "flex" : "none";
+letterPrev.style.setProperty(
+    "display",
+    page2Open ? "flex" : "none",
+    "important"
+);
 
-letterNext.style.display =
-    page2Open ? "none" : "flex";
-
+letterNext.style.setProperty(
+    "display",
+    page2Open ? "none" : "flex",
+    "important"
+);
         const top =
             activePage.scrollTop +
             activePage.clientHeight / 2 -
