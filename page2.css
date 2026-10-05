@@ -2231,7 +2231,7 @@ body {
 }
 
 /* =====================================================
-   LETTER APP — PAGE FLIP
+   LETTER APP — FULL PAGE + SCROLL + PAGE FLIP
 ===================================================== */
 
 .letter-content {
@@ -2244,7 +2244,8 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     perspective: 1800px;
 }
 
@@ -2254,10 +2255,12 @@ body {
 
 .letter-page {
     position: absolute;
-    inset: 0;
+
+    top: 0;
+    left: 0;
 
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 
     background: #ffffff;
 
@@ -2275,27 +2278,41 @@ body {
     display: block;
 
     width: 100%;
-    height: 100%;
+    height: auto;
 
-    object-fit: contain;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+
+    object-fit: initial;
 
     user-select: none;
     -webkit-user-drag: none;
 }
 
-/* Trang 1 */
+/* =========================
+   TRANG 1
+========================= */
+
 .letter-page-1 {
     z-index: 2;
     transform: rotateY(0deg);
 }
 
-/* Trang 2 */
+/* =========================
+   TRANG 2
+========================= */
+
 .letter-page-2 {
     z-index: 1;
     transform: rotateY(180deg);
 }
 
-/* Khi lật sang trang 2 */
+/* =========================
+   LẬT SANG TRANG 2
+========================= */
+
 .letter-book.show-page-2 .letter-page-1 {
     transform: rotateY(-180deg);
 }
@@ -2306,12 +2323,12 @@ body {
 }
 
 /* =========================
-   ARROW BUTTONS
+   NÚT LẬT TRANG
 ========================= */
 
 .letter-prev,
 .letter-next {
-    position: absolute;
+    position: fixed;
 
     top: 50%;
 
@@ -2323,7 +2340,7 @@ body {
     border: none;
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.92);
 
     color: #7b3b3b;
 
@@ -2332,7 +2349,7 @@ body {
 
     cursor: pointer;
 
-    z-index: 10;
+    z-index: 20;
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
@@ -2355,7 +2372,9 @@ body {
     right: 15px;
 }
 
-/* Chỉ hiện nút phù hợp với trang hiện tại */
+/* =========================
+   ẨN NÚT KHÔNG CẦN THIẾT
+========================= */
 
 .letter-book:not(.show-page-2) .letter-prev {
     opacity: 0;
