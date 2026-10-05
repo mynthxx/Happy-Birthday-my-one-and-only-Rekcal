@@ -2181,3 +2181,54 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* =====================================================
+   TRÁI TIM PHÍA SAU CÁC CON SỐ — CALENDAR
+===================================================== */
+
+.time-box {
+    position: relative;
+}
+
+
+/* Trái tim lớn nằm phía sau số */
+
+.time-box::before {
+    content: "♥";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -54%);
+
+    font-size: clamp(65px, 6vw, 100px);
+
+    color: rgba(255, 105, 120, 0.20);
+
+    line-height: 1;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    text-shadow:
+        0 2px 8px rgba(255, 180, 190, 0.25);
+}
+
+
+/* Đưa số lên trên trái tim */
+
+.time-box span {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Đưa chữ "năm / tháng / ngày..." lên trên */
+
+.time-box small {
+    position: relative;
+    z-index: 2;
+}
