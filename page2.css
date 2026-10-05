@@ -2156,3 +2156,28 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================
+   LOVE APP — CANVA PAGES
+========================= */
+
+.love-content {
+  padding: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: #ffffff;
+}
+
+.love-pages {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.love-pages img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
