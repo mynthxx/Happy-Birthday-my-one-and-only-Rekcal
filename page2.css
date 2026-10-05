@@ -2400,18 +2400,14 @@ body {
 
 
 /* =========================
-   CHỈ HIỆN ĐÚNG NÚT
+   HIỂN THỊ NÚT
 ========================= */
 
 .letter-prev {
     display: none !important;
 }
 
-.letter-book.show-page-2 ~ .letter-prev {
-    display: flex !important;
-}
-
-.letter-book:not(.show-page-2) ~ .letter-next {
+.letter-next {
     display: flex !important;
 }
 
