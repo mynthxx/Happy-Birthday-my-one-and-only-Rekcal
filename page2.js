@@ -2652,7 +2652,13 @@ if (
             page2Open ? letterPage2 : letterPage1;
 
         const arrow =
-            page2Open ? letterPrev : letterNext;
+    page2Open ? letterPrev : letterNext;
+
+letterPrev.style.display =
+    page2Open ? "flex" : "none";
+
+letterNext.style.display =
+    page2Open ? "none" : "flex";
 
         const top =
             activePage.scrollTop +
