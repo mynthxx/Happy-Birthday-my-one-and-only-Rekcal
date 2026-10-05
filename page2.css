@@ -2229,3 +2229,28 @@ body {
     position: relative !important;
     z-index: 2 !important;
 }
+
+/* =====================================================
+   LETTER APP — CANVA PAGES
+===================================================== */
+
+.letter-content {
+    padding: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background: #ffffff;
+}
+
+.letter-pages {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.letter-pages img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
