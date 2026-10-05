@@ -2390,3 +2390,115 @@ body {
     opacity: 0;
     pointer-events: none;
 }
+
+/* =====================================================
+   LETTER — FIXED ARROWS + SCROLLABLE PAGES
+   OVERRIDE
+===================================================== */
+
+.letter-content {
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Khung Letter không được scroll */
+.letter-book {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    overflow: hidden !important;
+
+    perspective: 1800px;
+}
+
+/* Mỗi mặt thư tự scroll */
+.letter-page {
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    background: #ffffff;
+}
+
+/* Ảnh full chiều ngang */
+.letter-page img {
+    display: block !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* =====================================================
+   ARROWS — LUÔN NẰM GIỮA CỬA SỔ
+===================================================== */
+
+.letter-prev,
+.letter-next {
+    position: absolute !important;
+
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    border-radius: 50% !important;
+
+    background: rgba(255, 255, 255, 0.95) !important;
+
+    color: #7b3b3b !important;
+
+    font-size: 32px !important;
+    line-height: 44px !important;
+    text-align: center !important;
+
+    cursor: pointer !important;
+
+    z-index: 9999 !important;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18) !important;
+
+    transition: transform 0.2s ease !important;
+}
+
+.letter-prev {
+    left: 15px !important;
+}
+
+.letter-next {
+    right: 15px !important;
+}
+
+.letter-prev:hover,
+.letter-next:hover {
+    transform: translateY(-50%) scale(1.08) !important;
+}
+
+/* Trang 1: chỉ hiện nút sang phải */
+.letter-book:not(.show-page-2) .letter-prev {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Trang 2: chỉ hiện nút quay lại */
+.letter-book.show-page-2 .letter-next {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
