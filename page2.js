@@ -2626,22 +2626,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-/* =====================================================
-   LETTER — PAGE FLIP + FOLLOW SCROLL
-===================================================== */
+/* LETTER */
 
-const letterContent = document.querySelector(".letter-content");
 const letterBook = document.querySelector(".letter-book");
-
 const letterPage1 = document.querySelector(".letter-page-1");
 const letterPage2 = document.querySelector(".letter-page-2");
 
 const letterPrev = document.querySelector(".letter-prev");
 const letterNext = document.querySelector(".letter-next");
 
-
 if (
-    letterContent &&
     letterBook &&
     letterPage1 &&
     letterPage2 &&
@@ -2649,122 +2643,56 @@ if (
     letterNext
 ) {
 
-    /* =========================
-       ĐẶT VỊ TRÍ NÚT
-    ========================= */
+    function updateArrowPosition() {
 
-    function updateLetterArrow() {
+        const page2Open =
+            letterBook.classList.contains("show-page-2");
 
-        let activePage;
+        const activePage =
+            page2Open ? letterPage2 : letterPage1;
 
-        if (letterBook.classList.contains("show-page-2")) {
-            activePage = letterPage2;
-        } else {
-            activePage = letterPage1;
-        }
+        const arrow =
+            page2Open ? letterPrev : letterNext;
 
-
-        const scrollTop = activePage.scrollTop;
-
-        const visibleHeight = activePage.clientHeight;
-
-
-        const arrowTop =
-            scrollTop +
-            (visibleHeight / 2) -
+        const top =
+            activePage.scrollTop +
+            activePage.clientHeight / 2 -
             22;
 
-
-        if (letterBook.classList.contains("show-page-2")) {
-
-            letterPrev.style.top =
-                arrowTop + "px";
-
-        } else {
-
-            letterNext.style.top =
-                arrowTop + "px";
-
-        }
-
+        arrow.style.top = top + "px";
     }
 
 
-    /* =========================
-       KÉO TRANG → NÚT ĐI THEO
-    ========================= */
+    letterNext.addEventListener("click", function () {
+
+        letterBook.classList.add("show-page-2");
+
+        letterPage2.scrollTop = 0;
+
+        setTimeout(updateArrowPosition, 50);
+    });
+
+
+    letterPrev.addEventListener("click", function () {
+
+        letterBook.classList.remove("show-page-2");
+
+        letterPage1.scrollTop = 0;
+
+        setTimeout(updateArrowPosition, 50);
+    });
+
 
     letterPage1.addEventListener(
         "scroll",
-        updateLetterArrow
+        updateArrowPosition
     );
 
     letterPage2.addEventListener(
         "scroll",
-        updateLetterArrow
+        updateArrowPosition
     );
 
 
-    /* =========================
-       NEXT
-    ========================= */
-
-    letterNext.addEventListener(
-        "click",
-        function () {
-
-            letterBook.classList.add(
-                "show-page-2"
-            );
-
-            letterPage2.scrollTop = 0;
-
-            setTimeout(
-                updateLetterArrow,
-                50
-            );
-
-        }
-    );
-
-
-    /* =========================
-       PREVIOUS
-    ========================= */
-
-    letterPrev.addEventListener(
-        "click",
-        function () {
-
-            letterBook.classList.remove(
-                "show-page-2"
-            );
-
-            letterPage1.scrollTop = 0;
-
-            setTimeout(
-                updateLetterArrow,
-                50
-            );
-
-        }
-    );
-
-
-    /* =========================
-       RESIZE
-    ========================= */
-
-    window.addEventListener(
-        "resize",
-        updateLetterArrow
-    );
-
-
-    /* =========================
-       VỊ TRÍ BAN ĐẦU
-    ========================= */
-
-    updateLetterArrow();
-
+    updateArrowPosition();
 }
