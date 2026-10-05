@@ -2242,10 +2242,12 @@ body {
 
 .letter-book {
     position: relative;
+
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+
+    overflow: hidden;
+
     perspective: 1800px;
 }
 
@@ -2260,7 +2262,10 @@ body {
     left: 0;
 
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
 
     background: #ffffff;
 
@@ -2328,7 +2333,7 @@ body {
 
 .letter-prev,
 .letter-next {
-    position: fixed;
+    position: absolute;
 
     top: 50%;
 
